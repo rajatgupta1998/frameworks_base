@@ -273,7 +273,7 @@ SkBitmap* BootAnimation::decode(const Animation::Frame& frame)
     if (codec != NULL) {
         bitmap = new SkBitmap();
         codec->setDitherImage(false);
-        codec->decode(&stream, bitmap,
+        codec->decode(&stream, &bitmap,
                 #ifdef USE_565
                 kRGB_565_SkColorType,
                 #else
@@ -282,7 +282,6 @@ SkBitmap* BootAnimation::decode(const Animation::Frame& frame)
                 SkImageDecoder::kDecodePixels_Mode);
         delete codec;
     }
-
     return bitmap;
 }
 
@@ -291,6 +290,11 @@ status_t BootAnimation::initTexture(const Animation::Frame& frame)
     //StopWatch watch("blah");
     return initTexture(decode(frame));
 }
+=======
+    // ensure we can call getPixels(). No need to call unlock, since the
+    // bitmap will go out of scope when we return from this method.
+    bitmap.lockPixels();
+>>>>>>> 9c065b6... bootanimation: performance/speedup enhancements
 
 status_t BootAnimation::initTexture(SkBitmap *bitmap)
 {
