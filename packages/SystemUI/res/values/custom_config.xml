@@ -24,4 +24,9 @@
     <!-- Resolver -->
     <color name="resolver_list_bg">@android:color/white</color>
 
+    <!-- The default tiles to display in QuickSettings -->
+    <string name="quick_settings_tiles_extra" translatable="false">
+        adb_network,weather,pip,screenshot,caffeine,headsup,screenrecord,keydisable,navbardisable,assist,voiceassist,google,sync
+    </string>
+
 </resources>
