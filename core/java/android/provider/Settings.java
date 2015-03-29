@@ -4285,6 +4285,13 @@ public final class Settings {
         public static final String POWERMENU_ADVANCED_REBOOT = "powermenu_advanced_reboot";
 
         /**
+         * Screenshod sound enable, This is the noise made when taeking a screesnhot
+         * Defaults to 1 - sounds enabled
+         * @hide
+         */
+        public static final String SCREENSHOT_SHUTTER_SOUND = "screenshot_shutter_sound";
+
+        /**
          * Whether to display the screenshot option on the power menu
          *
          * @hide
