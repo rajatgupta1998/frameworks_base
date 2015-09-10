@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Nitrogen Project
+ * Copyright (C) 2017 The CandyRom Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,17 @@
 
 package com.android.internal.util.candy;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
 
+import java.util.List;
 import java.util.Locale;
 
 public class CandyUtils {
@@ -78,4 +82,54 @@ public class CandyUtils {
      */
     public static Intent INTENT_LAUNCH_APP = new Intent(Intent.ACTION_MAIN)
             .setClassName(APP_PACKAGE_NAME, APP_PACKAGE_NAME + ".SettingsActivity");
+
+    // On-The-Go-Mode
+
+    /**
+     * Package name of onthego app
+     */
+    public static final String ACTION_ONTHEGO_TOGGLE = "action_onthego_toggle";
+
+    public static void processAction(final Context context, final String action) {
+
+        if (action == null || action.isEmpty()) {
+            return;
+        }
+
+        if (ACTION_ONTHEGO_TOGGLE.equals(action)) {
+            actionOnTheGoToggle(context);
+        }
+
+    }
+
+    private static void actionOnTheGoToggle(final Context context) {
+        final ComponentName cn = new ComponentName("com.android.systemui",
+                "com.android.systemui.candy.onthego.OnTheGoService");
+        final Intent startIntent = new Intent();
+        startIntent.setComponent(cn);
+        startIntent.setAction("start");
+        context.startService(startIntent);
+    }
+
+    /**
+     * Check if system has a camera.
+     *
+     * @param context
+     * @return
+     */
+    public static boolean hasCamera(final Context context) {
+        final PackageManager pm = context.getPackageManager();
+        return pm != null && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA);
+    }
+
+    /**
+     * Check if system has a front camera.
+     *
+     * @param context
+     * @return
+     */
+    public static boolean hasFrontCamera(final Context context) {
+        final PackageManager pm = context.getPackageManager();
+        return pm != null && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT);
+    }
 }

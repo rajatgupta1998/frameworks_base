@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2017 CandyRoms Project!
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import com.android.internal.widget.LockPatternUtils;
 import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -37,6 +38,10 @@ import android.content.IntentFilter;
 import android.content.pm.UserInfo;
 import android.database.ContentObserver;
 import android.graphics.drawable.Drawable;
+import android.hardware.camera2.CameraManager;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraAccessException;
+import android.Manifest;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.os.Build;
@@ -70,6 +75,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.WindowManagerGlobal;
+import android.view.WindowManagerInternal;
 import android.view.WindowManagerPolicy.WindowManagerFuncs;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.AdapterView;
@@ -81,12 +87,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import android.content.ServiceConnection;
 import android.content.ComponentName;
 import android.os.IBinder;
 import android.os.Messenger;
 import android.os.RemoteException;
+
+import com.android.internal.util.candy.CandyActions;
 
 /**
  * Helper to show the global actions dialog.  Each item is an {@link Action} that
@@ -308,6 +317,34 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
         mItems = new ArrayList<Action>();
         String[] defaultActions = mContext.getResources().getStringArray(
                 com.android.internal.R.array.config_globalActionsList);
+
+	// next: On-The-Go, if enabled
+        boolean showOnTheGo = Settings.System.getBoolean(mContext.getContentResolver(),
+                Settings.System.POWER_MENU_ONTHEGO_ENABLED, false);
+        if (showOnTheGo) {
+            mItems.add(
+                new SinglePressAction(com.android.internal.R.drawable.ic_lock_onthego,
+                        R.string.global_action_onthego) {
+
+                        public void onPress() {
+                            CandyActions.processAction(mContext,
+                                    CandyActions.ACTION_ONTHEGO_TOGGLE);
+                        }
+
+                        public boolean onLongPress() {
+                            return false;
+                        }
+
+                        public boolean showDuringKeyguard() {
+                            return true;
+                        }
+
+                        public boolean showBeforeProvisioning() {
+                            return true;
+                        }
+                    }
+            );
+        }
 
         ArraySet<String> addedKeys = new ArraySet<String>();
         for (int i = 0; i < defaultActions.length; i++) {
@@ -911,6 +948,15 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                 mHandler.postDelayed(mScreenrecordTimeout, 31 * 60 * 1000);
             }
         }
+    }
+
+	private void startOnTheGo() {
+        final ComponentName cn = new ComponentName("com.android.systemui",
+                "com.android.systemui.candy.onthego.OnTheGoService");
+        final Intent startIntent = new Intent();
+        startIntent.setComponent(cn);
+        startIntent.setAction("start");
+        mContext.startService(startIntent);
     }
 
     private void prepareDialog() {

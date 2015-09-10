@@ -60,5 +60,8 @@
 
     <!-- Screenrecord in the power menu -->
     <string name="powermenu_screenrecord">Screen record</string>
-
+    
+    <!-- label for item that takes On-The-Go in the phone options dialog -->
+    <string name="global_action_onthego">On-The-Go Mode</string>
+   
 </resources>
