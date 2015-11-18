@@ -4237,13 +4237,6 @@ public final class Settings {
        public static final String BATTERY_LIGHT_LOW_BLINKING = "battery_light_low_blinking";
 
         /**
-         * Boolean value whether to link ringtone and notification volume
-         *
-         * @hide
-         */
-        public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
-
-        /**
          * Toast icon
          * @hide
          */
@@ -4415,6 +4408,13 @@ public final class Settings {
          * @hide
          */
         public static final String RECENT_PANEL_FAVORITES = "recent_panel_favorites";
+
+        /**
+         * Boolean value whether to link ringtone and notification volume
+         *
+         * @hide
+         */
+        public static final String VOLUME_LINK_NOTIFICATION = "volume_link_notification";
 
         /**
          * Recent panel expanded mode (auto = 0, always = 1, never = 2).
@@ -5056,6 +5056,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BATTERY_LIGHT_MEDIUM_COLOR);
             PRIVATE_SETTINGS.add(BATTERY_LIGHT_FULL_COLOR);
             PRIVATE_SETTINGS.add(BATTERY_LIGHT_REALLY_FULL_COLOR);
+            PRIVATE_SETTINGS.add(VOLUME_LINK_NOTIFICATION);
         }
 
         /**
