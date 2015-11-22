@@ -2624,4 +2624,8 @@
     <string name="operator_ping_url" translatable="false"></string>
     <!-- Zero Balance feature enable config -->
     <bool name="config_zero_balance_operator">false</bool>
+
+    <!-- Older rotation sensors are not setting event.timestamp correctly. Setting to
+         true will use SystemClock.elapsedRealtimeNanos() to set timestamp. -->
+    <bool name="config_useSystemClockforRotationSensor">false</bool>
 </resources>
