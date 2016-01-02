@@ -66,6 +66,7 @@ interface IStatusBarService
     void addTile(in ComponentName tile);
     void remTile(in ComponentName tile);
     void clickTile(in ComponentName tile);
+    void setAutoRotate(boolean enabled);
 
     // Start DU methods
     void toggleRecentApps();
@@ -74,4 +75,5 @@ interface IStatusBarService
     void cancelPreloadRecentApps();
     void startAssist(in Bundle args);
     void screenPinningStateChanged(boolean enabled);
+    
 }
