@@ -89,6 +89,7 @@ public class KeyguardStatusView extends GridLayout implements
         @Override
         public void onTimeChanged() {
             refresh();
+            refreshClockColors();
         }
 
         @Override
@@ -97,12 +98,14 @@ public class KeyguardStatusView extends GridLayout implements
                 if (DEBUG) Slog.v(TAG, "refresh statusview showing:" + showing);
                 refresh();
                 updateOwnerInfo();
+            refreshClockColors();
             }
         }
 
         @Override
         public void onStartedWakingUp() {
             setEnableMarquee(true);
+            refreshClockColors();
         }
 
         @Override
@@ -114,6 +117,7 @@ public class KeyguardStatusView extends GridLayout implements
         public void onUserSwitchComplete(int userId) {
             refresh();
             updateOwnerInfo();
+            refreshClockColors();
         }
     };
 
@@ -130,6 +134,7 @@ public class KeyguardStatusView extends GridLayout implements
         mAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         mLockPatternUtils = new LockPatternUtils(getContext());
         mWeatherClient = new OmniJawsClient(mContext);
+        refreshClockColors();
     }
 
     private void setEnableMarquee(boolean enabled) {
@@ -155,6 +160,7 @@ public class KeyguardStatusView extends GridLayout implements
         boolean shouldMarquee = KeyguardUpdateMonitor.getInstance(mContext).isDeviceInteractive();
         setEnableMarquee(shouldMarquee);
         refresh();
+        refreshClockColors();
         updateOwnerInfo();
 
         // Disable elegant text height because our fancy colon makes the ymin value huge for no
@@ -184,6 +190,26 @@ public class KeyguardStatusView extends GridLayout implements
                 Settings.System.LOCK_CLOCK_FONTS, 4);
     }
 
+    private int getLockClockColor() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_CLOCK_COLOR, 0xFFFFFFFF);
+    }
+
+    private int getLockClockDateColor() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_CLOCK_DATE_COLOR, 0xFFFFFFFF);
+    }
+
+    private int getLockClockOwnerColor() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_OWNER_INFO_COLOR, 0xFFFFFFFF);
+    }
+
+    private int getLockClockAlarmColor() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_ALARM_COLOR, 0xFFFFFFFF);
+    }
+
     public void refreshTime() {
         mDateView.setFormat24Hour(Patterns.dateView);
         mDateView.setFormat12Hour(Patterns.dateView);
@@ -199,6 +225,7 @@ public class KeyguardStatusView extends GridLayout implements
 
         refreshTime();
         refreshAlarmStatus(nextAlarm);
+        refreshClockColors();
         updateSettings(false);
     }
 
@@ -270,6 +297,28 @@ public class KeyguardStatusView extends GridLayout implements
             }
         }
         return info;
+    }
+
+    private void refreshClockColors() {
+        final Resources res = getContext().getResources();
+        boolean isPrimary = UserHandle.getCallingUserId() == UserHandle.USER_OWNER;
+        int clockColor = isPrimary ? getLockClockColor() : 0xFFFFFFFF;
+        int clockDateColor = isPrimary ? getLockClockDateColor() : 0xFFFFFFFF;
+        int ownerInfoColor = isPrimary ? getLockClockOwnerColor() : 0xFFFFFFFF;
+        int alarmColor = isPrimary ? getLockClockAlarmColor() : 0xFFFFFFFF;
+
+        if (mClockView != null) {
+            mClockView.setTextColor(clockColor);
+        }
+        if (mDateView != null) {
+            mDateView.setTextColor(clockDateColor);
+        }
+        if (mOwnerInfo != null) {
+            mOwnerInfo.setTextColor(ownerInfoColor);
+        }
+        if (mAlarmStatusView != null) {
+            mAlarmStatusView.setTextColor(alarmColor);
+        }
     }
 
     @Override
