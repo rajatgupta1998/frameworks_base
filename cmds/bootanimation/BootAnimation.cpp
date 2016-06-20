@@ -70,6 +70,7 @@
 #define OEM_BOOTANIMATION_FILE "/oem/media/bootanimation.zip"
 #define SYSTEM_BOOTANIMATION_FILE "/system/media/bootanimation.zip"
 #define SYSTEM_ENCRYPTED_BOOTANIMATION_FILE "/system/media/bootanimation-encrypted.zip"
+#define THEME_BOOTANIMATION_FILE "/data/system/theme/bootanimation.zip"
 
 #define OEM_SHUTDOWN_ANIMATION_FILE "/oem/media/shutdownanimation.zip"
 #define SYSTEM_SHUTDOWN_ANIMATION_FILE "/system/media/shutdownanimation.zip"
@@ -80,7 +81,6 @@
 
 #define OEM_SHUTDOWN_MUSIC_FILE "/oem/media/shutdown.wav"
 #define SYSTEM_SHUTDOWN_MUSIC_FILE "/system/media/shutdown.wav"
-
 #define EXIT_PROP_NAME "service.bootanim.exit"
 
 namespace android {
@@ -549,6 +549,12 @@ status_t BootAnimation::readyToRun() {
     }
     else if (access(getAnimationFileName(IMG_SYS), R_OK) == 0) {
         mZipFileName = getAnimationFileName(IMG_SYS);
+    }
+    else if (access(THEME_BOOTANIMATION_FILE, R_OK) == 0) {
+        mZipFileName = THEME_BOOTANIMATION_FILE;
+    }
+    else if (access(OEM_BOOTANIMATION_FILE, R_OK) == 0) {
+        mZipFileName = OEM_BOOTANIMATION_FILE;
     }
 
 #ifdef PRELOAD_BOOTANIMATION
