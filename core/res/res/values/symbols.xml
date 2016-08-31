@@ -2810,6 +2810,13 @@
   <java-symbol type="string" name="def_wifi_direct_name" />
   <java-symbol type="bool" name="config_usb_data_unlock" />
 
+  <java-symbol type="bool" name="use_lock_pattern_drawable" />
+  <java-symbol type="drawable" name="lockscreen_notselected" />
+  <java-symbol type="drawable" name="lockscreen_selected" />
+
+  <!-- Add VoLTE preferred function control flag -->
+  <java-symbol type="bool" name="config_volte_preferred" />
+
   <!-- Gesture Sensor -->
   <java-symbol type="bool" name="config_enableGestureService" />
   <java-symbol type="string" name="operator_config_url" />
