@@ -531,15 +531,8 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
             v.setImageTintList(ColorStateList.valueOf(getTint(mTintArea, v, mIconTint)));
         }
         mSignalCluster.setIconTint(mIconTint, mDarkIntensity, mTintArea);
-<<<<<<< HEAD
-        mBatteryMeterView.setDarkIntensity(
-                isInArea(mTintArea, mBatteryMeterView) ? mDarkIntensity : 0);
         mClockController.setTextColor(mIconTint);
-=======
-        //mBatteryViewManager.setDarkIntensity(
-        //        isInArea(mTintArea, mBatteryViewManager) ? mDarkIntensity : 0);
-        mClock.setTextColor(getTint(mTintArea, mClock, mIconTint));
->>>>>>> 530ccce... [1/2] base: battery styles are back
+        mBatteryViewManager.setDarkIntensity(mDarkIntensity);
     }
 
     public void appTransitionPending() {
