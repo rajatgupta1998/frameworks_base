@@ -282,17 +282,7 @@ SkBitmap* BootAnimation::decode(const Animation::Frame& frame)
                 SkImageDecoder::kDecodePixels_Mode);
         delete codec;
     }
-    return bitmap;
-}
-    // ensure we can call getPixels(). No need to call unlock, since the
-    // bitmap will go out of scope when we return from this method.
-    bitmap.lockPixels();
-    
-status_t BootAnimation::initTexture(const Animation::Frame& frame)
-{
-    //StopWatch watch("blah");
-    return initTexture(decode(frame));
-}
+
     return bitmap;
 }
 
@@ -301,6 +291,7 @@ status_t BootAnimation::initTexture(const Animation::Frame& frame)
     //StopWatch watch("blah");
     return initTexture(decode(frame));
 }
+
 status_t BootAnimation::initTexture(SkBitmap *bitmap)
 {
     // ensure we can call getPixels().
@@ -1313,4 +1304,3 @@ bool FrameManager::DecodeThread::threadLoop()
 // ---------------------------------------------------------------------------
 
 }
-; // namespace android
