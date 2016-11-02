@@ -2816,6 +2816,7 @@
 
   <!-- Add VoLTE preferred function control flag -->
   <java-symbol type="bool" name="config_volte_preferred" />
+  <java-symbol type="bool" name="operator_custom_sim_icon" />
 
   <!-- Gesture Sensor -->
   <java-symbol type="bool" name="config_enableGestureService" />
