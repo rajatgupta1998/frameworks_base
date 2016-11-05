@@ -863,14 +863,14 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                         msg.replyTo = new Messenger(h);
                         msg.arg1 = msg.arg2 = 0;
 
-                        /* wait for the dialog box to close */
+                        // Needs delay or else we'll be taking a screenshot of the dialog each time
                         try {
-                            Thread.sleep(mScreenshotDelay);
+                            Thread.sleep(1000);
                         } catch (InterruptedException ie) {
                             // Do nothing
                         }
 
-                        /* take the screenshot */
+                        // Take the screenshot
                         try {
                             messenger.send(msg);
                         } catch (RemoteException e) {
