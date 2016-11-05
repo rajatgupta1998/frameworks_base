@@ -492,9 +492,11 @@ public class PhoneStatusBarPolicy implements Callback, RotationLockController.Ro
                 mIconController.setIcon(mSlotRotate, R.drawable.stat_sys_rotate_landscape,
                         mContext.getString(R.string.accessibility_rotation_lock_on_landscape));
             }
-            mIconController.setIconVisibility(mSlotRotate, true);
         } else {
-            mIconController.setIconVisibility(mSlotRotate, false);
+            mIconController.setIcon(mSlotRotate, portrait
+                    ? R.drawable.stat_sys_auto_rotate_portrait
+                    : R.drawable.stat_sys_auto_rotate_landscape,
+                    mContext.getString(R.string.accessibility_rotation_lock_off));
         }
     }
 

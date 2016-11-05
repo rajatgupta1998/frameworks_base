@@ -26,7 +26,7 @@ public class TunerSwitch extends SwitchPreference implements Tunable {
     @Override
     public void onAttached() {
         super.onAttached();
-        TunerService.get(getContext()).addTunable(this, getKey().split(","));
+        TunerService.get(getContext()).addTunable(this, getKey());
     }
 
     @Override
@@ -50,9 +50,7 @@ public class TunerSwitch extends SwitchPreference implements Tunable {
 
     @Override
     protected boolean persistBoolean(boolean value) {
-        for (String key : getKey().split(",")) {
-            Settings.Secure.putString(getContext().getContentResolver(), key, value ? "1" : "0");
-        }
+        Settings.Secure.putString(getContext().getContentResolver(), getKey(), value ? "1" : "0");
         return true;
     }
 

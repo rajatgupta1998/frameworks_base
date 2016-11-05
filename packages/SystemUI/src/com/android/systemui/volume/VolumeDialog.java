@@ -761,12 +761,10 @@ public class VolumeDialog implements TunerService.Tunable {
         final boolean isNotificationSilent = isNotificationStream
                 && mState.ringerModeInternal == AudioManager.RINGER_MODE_SILENT;
         final boolean isZenAlarms = mState.zenMode == Global.ZEN_MODE_ALARMS;
-        final boolean isRingZenNone = (isRingOrNotificationStream || isSystemStream) && isZenNone;
-        final boolean isRingLimited = isRingOrNotificationStream && isZenPriority;
-        final boolean zenMuted = isZenAlarms ? (isRingOrNotificationStream || isSystemStream)
-                : isZenNone ? (isRingOrNotificationStream || isSystemStream || isAlarmStream || isMusicStream)
-                : false;
-
+        final boolean isZenNone = mState.zenMode == Global.ZEN_MODE_NO_INTERRUPTIONS;
+        final boolean zenMuted = isZenAlarms ? (isRingStream || isSystemStream)
+                        : isZenNone ? (isRingStream || isSystemStream || isAlarmStream || isMusicStream)
+         : false;
         // update slider max
         final int max = ss.levelMax * 100;
         if (max != row.slider.getMax()) {
