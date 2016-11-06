@@ -150,6 +150,8 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
 
     private final EmergencyAffordanceManager mEmergencyAffordanceManager;
 
+    private int mScreenshotDelay;
+
     /**
      * @param context everything needs a context :(
      */
@@ -218,6 +220,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
 
     private void handleShow() {
         awakenIfNecessary();
+        checkSettings();
         mDialog = createDialog();
         prepareDialog();
         WindowManager.LayoutParams attrs = mDialog.getWindow().getAttributes();
@@ -862,7 +865,7 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
 
                         /* wait for the dialog box to close */
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(mScreenshotDelay);
                         } catch (InterruptedException ie) {
                             // Do nothing
                         }
