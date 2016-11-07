@@ -46,14 +46,10 @@ public class ScreenshotTile extends QSTile<QSTile.BooleanState> {
     private final Object mScreenshotLock = new Object();
     private ServiceConnection mScreenshotConnection = null;
 
-<<<<<<< HEAD
-=======
     private int mScreenshotFullscreen = TAKE_SCREENSHOT_FULLSCREEN;
     private int mScreenshotSelectedRegion = TAKE_SCREENSHOT_SELECTED_REGION;
-
     private int mScreenshotDelay;
 
->>>>>>> 7f183d2... Screenshot delay [1/2]
     public ScreenshotTile(Host host) {
         super(host);
     }
@@ -80,11 +76,7 @@ public class ScreenshotTile extends QSTile<QSTile.BooleanState> {
         checkSettings();
         /* wait for the panel to close */
         try {
-<<<<<<< HEAD
-             Thread.sleep(1000);
-=======
              Thread.sleep(mScreenshotDelay);
->>>>>>> 7f183d2... Screenshot delay [1/2]
         } catch (InterruptedException ie) {
              // Do nothing
         }
