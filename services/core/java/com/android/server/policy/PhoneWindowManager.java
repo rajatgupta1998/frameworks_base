@@ -4518,13 +4518,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         if ((pfl & PRIVATE_FLAG_STATUS_HIDE_FORCED) != 0) {
             r.top = mForceImmersiveTop;
         }
-        if ((pfl & PRIVATE_FLAG_NAV_HIDE_FORCED) != 0) {
-            if (mNavigationBarOnBottom) {
-                r.bottom = mForceImmersiveBottom;
-            } else {
-                r.right = mForceImmersiveRight;
-            }
-        }
     }
 
     private void applyStableConstraints(int sysui, int fl, Rect r) {

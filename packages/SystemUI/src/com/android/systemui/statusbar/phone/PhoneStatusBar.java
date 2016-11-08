@@ -3660,7 +3660,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     @Override
     public void onDisplayChanged(int displayId) {
         if (displayId == Display.DEFAULT_DISPLAY
-                && mNavigationController.getBar() != null && mNavigationController.needsReorient()) {
+                && mNavigationController.getBar() != null) {
             repositionNavigationBar();
         }
     }
@@ -4487,10 +4487,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             previousView.makeInactive(true /* animate */);
         }
         mStackScroller.setActivatedChild(view);
-    }
-
-    public ButtonDispatcher getHomeButton() {
-        return mNavigationController.getHomeButton();
     }
 
     /**

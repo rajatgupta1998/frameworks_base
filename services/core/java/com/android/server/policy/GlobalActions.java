@@ -47,8 +47,10 @@ import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.IPowerManager;
 import android.os.Message;
+import android.os.Messenger;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
@@ -1266,8 +1268,8 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
 
         public GlobalActionsDialog(Context context, AlertParams params) {
             super(context, getDialogTheme(context));
-            mContext = context;
-            mAlert = new AlertController(mContext, this, getWindow());
+            mContext = getContext();
+            mAlert = AlertController.create(mContext, this, getWindow());
             mAdapter = (MyAdapter) params.mAdapter;
             mWindowTouchSlop = ViewConfiguration.get(context).getScaledWindowTouchSlop();
             params.apply(mAlert);
