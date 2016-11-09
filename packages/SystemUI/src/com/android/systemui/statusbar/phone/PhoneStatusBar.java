@@ -5352,11 +5352,6 @@ mWeatherTempSize, mWeatherTempFontStyle, mWeatherTempColor);
         mKeyguardIndicationController.hideTransientIndicationDelayed(HINT_RESET_DELAY_MS);
     }
 
-    public void onVoiceAssistHintStarted() {
-        mFalsingManager.onLeftAffordanceHintStarted();
-        mKeyguardIndicationController.showTransientIndication(R.string.voice_hint);
-    }
-
     public void onCameraHintStarted(String hint) {
         mKeyguardIndicationController.showTransientIndication(hint);
     }
