@@ -173,4 +173,9 @@ public class ScreenshotTile extends QSTile<QSTile.BooleanState> {
             }
         }
     }
+
+    private void checkSettings() {
+        mScreenshotDelay = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SCREENSHOT_DELAY, 100);
+    }
 }

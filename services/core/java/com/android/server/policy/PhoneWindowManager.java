@@ -8755,4 +8755,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             mKeyguardDelegate.dump(prefix, pw);
         }
     }
+
+    private void checkSettings() {
+        mScreenshotDelay = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SCREENSHOT_DELAY, 100);
+    }
 }

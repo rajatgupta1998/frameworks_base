@@ -1651,4 +1651,9 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
             return super.onKeyUp(keyCode, event);
         }
     }
+
+    private void checkSettings() {
+        mScreenshotDelay = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SCREENSHOT_DELAY, 100);
+    }
 }
