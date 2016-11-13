@@ -34,9 +34,7 @@ import android.view.View;
 import com.android.systemui.R;
 import com.android.systemui.screenshot.TakeScreenshotService;
 import com.android.systemui.qs.QSTile;
-
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-
 
 /** Quick settings tile: Screenshot **/
 public class ScreenshotTile extends QSTile<QSTile.BooleanState> {
@@ -46,8 +44,6 @@ public class ScreenshotTile extends QSTile<QSTile.BooleanState> {
     private final Object mScreenshotLock = new Object();
     private ServiceConnection mScreenshotConnection = null;
 
-    private int mScreenshotFullscreen = TAKE_SCREENSHOT_FULLSCREEN;
-    private int mScreenshotSelectedRegion = TAKE_SCREENSHOT_SELECTED_REGION;
     private int mScreenshotDelay;
 
     public ScreenshotTile(Host host) {
@@ -184,3 +180,4 @@ public class ScreenshotTile extends QSTile<QSTile.BooleanState> {
                 Settings.System.SCREENSHOT_DELAY, 100);
     }
 }
+
