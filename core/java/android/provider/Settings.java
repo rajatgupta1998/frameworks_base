@@ -3828,6 +3828,24 @@ public final class Settings {
         public static final String VOLUME_ROCKER_MUSIC_CONTROLS = "volume_rocker_music_controls";
 
         /**
+         * Disable dashboard suggestions in settings
+         * @hide
+         */
+        public static final String DISABLE_SUGGESTIONS = "disable_suggestions";
+
+        /**
+         * Remove tile summaries in settings
+         * @hide
+         */
+        public static final String REMOVE_TILE_SUMMARY = "remove_tile_summary";
+
+        /**
+         * Disable dashboard conditions in settings
+         * @hide
+         */
+        public static final String DISABLE_DASHBOARD_CONDITIONS = "disable_dashboard_conditions";
+
+        /**
          * Enable/disable overwrite default value for ambient display
          * @hide
          */
