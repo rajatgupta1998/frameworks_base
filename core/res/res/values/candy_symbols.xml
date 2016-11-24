@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-/* Copyright 2017, The Android Open Source Project
+/* Copyright 2017, CandyRoms
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 ** limitations under the License.
 */
 -->
+
 <resources>
 
   <!-- Package Manager -->
@@ -69,6 +70,20 @@
 
   <!-- Config IME switcher -->
   <java-symbol type="bool" name="config_show_IMESwitcher" />
+
+  <!-- One handed mode -->
+  <java-symbol type="id" name="relative_top" />
+  <java-symbol type="id" name="hint_info" />
+  <java-symbol type="id" name="single_hand_window_title" />
+  <java-symbol type="id" name="click_hint" />
+  <java-symbol type="id" name="hint_section" />
+  <java-symbol type="id" name="relative_bottom" />
+  <java-symbol type="id" name="singlehandmode_slide_hint_text" />
+  <java-symbol type="id" name="slide_hint" />
+  <java-symbol type="id" name="slide_hint_area" />
+  <java-symbol type="string" name="singlehandmode_click_hint_message" />
+  <java-symbol type="string" name="singlehandmode_slide_hint_message" />
+  <java-symbol type="layout" name="single_hand_window" />
 
    <!-- Doze mode -->
   <java-symbol type="bool" name="config_doze_enabled_by_default" />
