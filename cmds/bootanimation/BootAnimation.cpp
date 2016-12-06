@@ -1037,12 +1037,6 @@ bool BootAnimation::playAnimation(const Animation& animation)
             }
 #endif
 
-#ifdef MULTITHREAD_DECODE
-            if (frameManager) {
-                delete frameManager;
-            }
-#endif
-
             // For infinite parts, we've now played them at least once, so perhaps exit
             if(exitPending() && !part.count)
                 break;
@@ -1372,118 +1366,6 @@ status_t BootAnimation::TimeCheckThread::readyToRun() {
 
     return NO_ERROR;
 }
-
-
-#ifdef MULTITHREAD_DECODE
-FrameManager::FrameManager(int numThreads, size_t maxSize, const SortedVector<BootAnimation::Animation::Frame>& frames) :
-    mMaxSize(maxSize),
-    mFrameCounter(0),
-    mNextIdx(0),
-    mFrames(frames),
-    mExit(false)
-{
-    pthread_mutex_init(&mBitmapsMutex, NULL);
-    pthread_cond_init(&mSpaceAvailableCondition, NULL);
-    pthread_cond_init(&mBitmapReadyCondition, NULL);
-    for (int i = 0; i < numThreads; i++) {
-        DecodeThread *thread = new DecodeThread(this);
-        thread->run("bootanimation", PRIORITY_URGENT_DISPLAY);
-        mThreads.add(thread);
-    }
-}
-
-FrameManager::~FrameManager()
-{
-    mExit = true;
-    pthread_cond_broadcast(&mSpaceAvailableCondition);
-    pthread_cond_broadcast(&mBitmapReadyCondition);
-    for (size_t i = 0; i < mThreads.size(); i++) {
-        mThreads.itemAt(i)->requestExitAndWait();
-    }
-
-    // Any bitmap left in the queue won't get cleaned up by
-    // the consumer.  Clean up now.
-    for (size_t i = 0; i < mDecodedFrames.size(); i++) {
-        delete mDecodedFrames[i].bitmap;
-    }
-}
-
-SkBitmap* FrameManager::next()
-{
-    pthread_mutex_lock(&mBitmapsMutex);
-
-    while (mDecodedFrames.size() == 0 ||
-            mDecodedFrames.itemAt(0).idx != mNextIdx) {
-        pthread_cond_wait(&mBitmapReadyCondition, &mBitmapsMutex);
-    }
-    DecodeWork work = mDecodedFrames.itemAt(0);
-    mDecodedFrames.removeAt(0);
-    mNextIdx++;
-    pthread_cond_signal(&mSpaceAvailableCondition);
-    pthread_mutex_unlock(&mBitmapsMutex);
-    // The caller now owns the bitmap
-    return work.bitmap;
-}
-
-FrameManager::DecodeWork FrameManager::getWork()
-{
-    DecodeWork work = {
-        .frame = NULL,
-        .bitmap = NULL,
-        .idx = 0
-    };
-
-    pthread_mutex_lock(&mBitmapsMutex);
-
-    while (mDecodedFrames.size() >= mMaxSize && !mExit) {
-        pthread_cond_wait(&mSpaceAvailableCondition, &mBitmapsMutex);
-    }
-
-    if (!mExit) {
-        work.frame = &mFrames.itemAt(mFrameCounter % mFrames.size());
-        work.idx = mFrameCounter;
-        mFrameCounter++;
-    }
-
-    pthread_mutex_unlock(&mBitmapsMutex);
-    return work;
-}
-
-void FrameManager::completeWork(DecodeWork work) {
-    size_t insertIdx;
-    pthread_mutex_lock(&mBitmapsMutex);
-
-    for (insertIdx = 0; insertIdx < mDecodedFrames.size(); insertIdx++) {
-        if (work.idx < mDecodedFrames.itemAt(insertIdx).idx) {
-            break;
-        }
-    }
-
-    mDecodedFrames.insertAt(work, insertIdx);
-    pthread_cond_signal(&mBitmapReadyCondition);
-
-    pthread_mutex_unlock(&mBitmapsMutex);
-}
-
-FrameManager::DecodeThread::DecodeThread(FrameManager* manager) :
-    Thread(false),
-    mManager(manager)
-{
-
-}
-
-bool FrameManager::DecodeThread::threadLoop()
-{
-    DecodeWork work = mManager->getWork();
-    if (work.frame != NULL) {
-        work.bitmap = BootAnimation::decode(*work.frame);
-        mManager->completeWork(work);
-        return true;
-    }
-
-    return false;
-}
-#endif
 
 // ---------------------------------------------------------------------------
 
