@@ -176,4 +176,7 @@ public class BridgePowerManager implements IPowerManager {
         // pass for now
     }
 
+    public void updateBlockedUids(int uid, boolean isBlocked) throws RemoteException {
+        // pass for now.
+    }
 }
