@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2016 The OmniROM Project
+  Copyright (C) 2016 The CandyRoms Project
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -20,5 +20,20 @@
     <dimen name="keyguard_shortcut_item_margin">10dp</dimen>
 
     <dimen name="battery_level_text_size_small">12sp</dimen>
+
+	<!-- Animated Nav Dimens -->
+    <dimen name="halo_inner_radius">10.0dip</dimen>
+    <dimen name="halo_thickness">1.0dip</dimen>
+    <dimen name="halo_diameter">22.0dip</dimen>
+    <dimen name="opa_dot_diam">10.0dip</dimen>
+    <dimen name="opa_diamond_translation">16.0dip</dimen>
+    <dimen name="opa_line_y_translation">16.0dip</dimen>
+    <dimen name="opa_line_x_trans_ry">15.0dip</dimen>
+    <dimen name="opa_line_x_trans_bg">30.0dip</dimen>
+    <dimen name="opa_line_x_collapse_bg">46.0dip</dimen>
+    <dimen name="opa_line_x_collapse_ry">15.0dip</dimen>
+    <dimen name="opa_overshoot_translation">8.0dip</dimen>
+    <dimen name="opa_return_translation">-1.0dip</dimen>
+    <dimen name="opa_rest_to_collapse">7.0dip</dimen>
 
 </resources>
