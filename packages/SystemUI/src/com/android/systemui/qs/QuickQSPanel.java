@@ -254,8 +254,8 @@ public class QuickQSPanel extends QSPanel {
             }
         }
 
-        @Override
-        public void update() {
+     @Override
+     public void updateSettings() {
         }
     }
 }
