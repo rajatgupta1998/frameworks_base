@@ -4582,6 +4582,7 @@ public final class Settings {
 
         /**
          * Whether to show or hide the Settings Shortcut
+         * show clear all recents button
          * @hide
          */
         public static final String QS_SETTINGS_ICON_TOGGLE = "qs_settings_icon_toggle";
@@ -4594,6 +4595,21 @@ public final class Settings {
 
         /**
          * Whether to show or hide the edit icon
+         * show the membar in recents
+         *  @hide
+         */
+        public static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "systemui_recents_mem_display";
+
+        /**
+         * Enable looking up of phone numbers of nearby places
+         *
+         * @hide
+         */
+        public static final String ENABLE_FORWARD_LOOKUP = "enable_forward_lookup";
+
+        /**
+         * Enable looking up of phone numbers of people
+         *
          * @hide
          */
         public static final String QS_EDIT_TOGGLE = "qs_edit_toggle";
