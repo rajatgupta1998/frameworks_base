@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.systemui.tesla.carrierlabel;
+package com.android.systemui.candy.carrierlabel;
 
 import java.io.File;
 import java.io.FileNotFoundException;

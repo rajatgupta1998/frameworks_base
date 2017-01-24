@@ -101,7 +101,7 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.statusbar.StatusBarIcon;
-import com.android.internal.util.tesla.TeslaUtils;
+import com.android.internal.util.candy.CandyUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.keyguard.KeyguardHostView.OnDismissAction;
 import com.android.keyguard.KeyguardUpdateMonitor;
@@ -1526,7 +1526,7 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     protected void showRecents(boolean triggeredFromAltTab, boolean fromHome) {
         if (isOmniSwitchEnabled()) {
-            Intent showIntent = new Intent(TeslaUtils.ACTION_SHOW_OVERLAY);
+            Intent showIntent = new Intent(CandyUtils.ACTION_SHOW_OVERLAY);
             mContext.sendBroadcastAsUser(showIntent, UserHandle.CURRENT);
         } else {
             if (mRecents != null) {
@@ -1538,7 +1538,7 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     protected void hideRecents(boolean triggeredFromAltTab, boolean triggeredFromHomeKey) {
         if (isOmniSwitchEnabled()) {
-            Intent showIntent = new Intent(TeslaUtils.ACTION_HIDE_OVERLAY);
+            Intent showIntent = new Intent(CandyUtils.ACTION_HIDE_OVERLAY);
             mContext.sendBroadcastAsUser(showIntent, UserHandle.CURRENT);
         } else if (mRecents != null) {
             mRecents.hideRecents(triggeredFromAltTab, triggeredFromHomeKey);
@@ -1547,7 +1547,7 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     protected void toggleRecents() {
         if (isOmniSwitchEnabled()) {
-            Intent showIntent = new Intent(TeslaUtils.ACTION_TOGGLE_OVERLAY);
+            Intent showIntent = new Intent(CandyUtils.ACTION_TOGGLE_OVERLAY);
             mContext.sendBroadcastAsUser(showIntent, UserHandle.CURRENT);
         } else if (mRecents != null) {
             mRecents.toggleRecents(mDisplay);

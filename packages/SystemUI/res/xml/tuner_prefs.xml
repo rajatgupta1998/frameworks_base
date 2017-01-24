@@ -16,9 +16,9 @@
     android:title="@string/systemui_tuner_statusbar_title">
 
         <SwitchPreference
-            android:key="status_bar_tesla_logo"
-            android:title="@string/status_bar_tesla_logo_title"
-            android:summary="@string/status_bar_tesla_logo_summary"
+            android:key="status_bar_candy_logo"
+            android:title="@string/status_bar_candy_logo_title"
+            android:summary="@string/status_bar_candy_logo_summary"
             android:defaultValue="false" />
 
         <com.android.systemui.tuner.StatusBarSwitch

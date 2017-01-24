@@ -1,4 +1,4 @@
-package com.android.systemui.tesla;
+package com.android.systemui.candy;
 
 import android.content.Context;
 import android.content.Intent;

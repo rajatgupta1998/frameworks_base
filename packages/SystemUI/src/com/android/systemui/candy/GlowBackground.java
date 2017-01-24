@@ -1,4 +1,4 @@
-package com.android.systemui.tesla;
+package com.android.systemui.candy;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;

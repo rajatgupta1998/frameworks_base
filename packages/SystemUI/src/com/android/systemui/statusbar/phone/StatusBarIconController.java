@@ -86,8 +86,8 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
     private NetworkTraffic mNetworkTraffic;
     private TextView mCarrierLabel;
 
-    // Tesla Logo
-    private ImageView mTeslaLogo;
+    // Candy Logo
+    private ImageView mCandyLogo;
 
     private TextView mWeather;
     private TextView mWeatherLeft;
@@ -155,7 +155,7 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
 
         mCarrierLabel = (TextView) statusBar.findViewById(R.id.statusbar_carrier_text);
 
-        mTeslaLogo = (ImageView) statusBar.findViewById(R.id.tesla_logo);
+        mCandyLogo = (ImageView) statusBar.findViewById(R.id.candy_logo);
         mWeather = (TextView) statusBar.findViewById(R.id.weather_temp);
         mWeatherLeft = (TextView) statusBar.findViewById(R.id.left_weather_temp);
         mDarkModeIconColorSingleTone = context.getColor(R.color.dark_mode_icon_color_single_tone);
@@ -367,8 +367,8 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
         animateHide(mNotificationIconAreaInner, animate);
         animateHide(mCenterClockLayout, animate);
         if (Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_TESLA_LOGO, 0) == 1) {
-           animateHide(mTeslaLogo, animate);
+                Settings.System.STATUS_BAR_CANDY_LOGO, 0) == 1) {
+           animateHide(mCandyLogo, animate);
         }
     }
 
@@ -376,8 +376,8 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
         animateShow(mNotificationIconAreaInner, animate);
         animateShow(mCenterClockLayout, animate);
         if (Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_TESLA_LOGO, 0) == 1) {
-           animateShow(mTeslaLogo, animate);
+                Settings.System.STATUS_BAR_CANDY_LOGO, 0) == 1) {
+           animateShow(mCandyLogo, animate);
         }
     }
 
@@ -582,7 +582,7 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
         mCarrierLabel.setTextColor(getTint(mTintArea, mCarrierLabel, mIconTint));
         mClockController.setTextColor(mIconTint);
 	mNetworkTraffic.setDarkIntensity(mDarkIntensity);
-        mTeslaLogo.setImageTintList(ColorStateList.valueOf(mIconTint));
+        mCandyLogo.setImageTintList(ColorStateList.valueOf(mIconTint));
         mBatteryLevelView.setTextColor(getTint(mTintArea, mBatteryLevelView, mIconTint));
         if (Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.STATUS_BAR_WEATHER_COLOR, 0xFFFFFFFF,

@@ -67,7 +67,7 @@ import com.android.systemui.qs.tiles.ScreenOffTile;
 import com.android.systemui.qs.tiles.ScreenshotTile;
 import com.android.systemui.qs.tiles.SoundTile;
 import com.android.systemui.qs.tiles.SyncTile;
-import com.android.systemui.qs.tiles.TeslaCoilTile;
+import com.android.systemui.qs.tiles.CandyCaneTile;
 import com.android.systemui.qs.tiles.UsbTetherTile;
 import com.android.systemui.qs.tiles.VolumeTile;
 import com.android.systemui.qs.tiles.UserTile;
@@ -463,7 +463,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (tileSpec.equals("screenshot")) return new ScreenshotTile(this);
         else if (tileSpec.equals("pie")) return new PieTile(this);
         else if (tileSpec.equals("music")) return new MusicTile(this);
-        else if (tileSpec.equals("teslacoil")) return new TeslaCoilTile(this);
+        else if (tileSpec.equals("candycane")) return new CandyCaneTile(this);
         else if (tileSpec.equals("lockscreen")) return  new LockscreenToggleTile(this);
         // Intent tiles.
         else if (tileSpec.startsWith(IntentTile.PREFIX)) return IntentTile.create(this,tileSpec);

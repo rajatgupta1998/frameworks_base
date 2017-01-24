@@ -48,11 +48,11 @@
         >
 
     <ImageView
-            android:id="@+id/tesla_logo"
+            android:id="@+id/candy_logo"
             android:layout_width="@dimen/status_bar_icon_size"
             android:layout_height="match_parent"
             android:paddingEnd="4dip"
-            android:src="@drawable/ic_status_bar_tesla_logo"
+            android:src="@drawable/ic_status_bar_candy_logo"
             android:scaleType="center"
             android:visibility="gone" />
 

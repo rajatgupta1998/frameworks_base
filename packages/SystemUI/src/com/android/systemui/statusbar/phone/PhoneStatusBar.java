@@ -131,9 +131,9 @@ import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 import com.android.internal.statusbar.NotificationVisibility;
 import com.android.internal.statusbar.StatusBarIcon;
-import com.android.internal.util.tesla.WeatherController;
-import com.android.internal.util.tesla.WeatherControllerImpl;
-import com.android.internal.util.tesla.WeatherController.WeatherInfo;
+import com.android.internal.util.candy.WeatherController;
+import com.android.internal.util.candy.WeatherControllerImpl;
+import com.android.internal.util.candy.WeatherController.WeatherInfo;
 import com.android.internal.utils.du.ActionHandler;
 import com.android.internal.utils.du.DUPackageMonitor;
 import com.android.internal.utils.du.DUSystemReceiver;
@@ -449,9 +449,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private TextView mCarrierLabel;
     boolean mExpandedVisible;
 
-    // Tesla logo
-    private boolean mTeslaLogo;
-    private ImageView teslaLogo;
+    // Candy logo
+    private boolean mCandyLogo;
+    private ImageView candyLogo;
 
     private int mNavigationBarWindowState = WINDOW_STATE_SHOWING;
 
@@ -723,7 +723,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.QS_COLUMNS_LANDSCAPE),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.STATUS_BAR_TESLA_LOGO),
+                    Settings.System.STATUS_BAR_CANDY_LOGO),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_SHOW_CARRIER),
@@ -815,9 +815,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
          public void update() {
             ContentResolver resolver = mContext.getContentResolver();
 
-            mTeslaLogo = Settings.System.getIntForUser(resolver,
-                    Settings.System.STATUS_BAR_TESLA_LOGO, 0, mCurrentUserId) == 1;
-            showTeslaLogo(mTeslaLogo);
+            mCandyLogo = Settings.System.getIntForUser(resolver,
+                    Settings.System.STATUS_BAR_CANDY_LOGO, 0, mCurrentUserId) == 1;
+            showCandyLogo(mCandyLogo);
 
             mWeatherTempState = Settings.System.getIntForUser(
                     resolver, Settings.System.STATUS_BAR_SHOW_WEATHER_TEMP, 0,
@@ -4109,12 +4109,12 @@ mWeatherTempSize, mWeatherTempFontStyle, mWeatherTempColor);
         }, cancelAction, afterKeyguardGone);
     }
 
-    public void showTeslaLogo(boolean show) {
+    public void showCandyLogo(boolean show) {
           if (mStatusBarView == null) return;
           ContentResolver resolver = mContext.getContentResolver();
-          teslaLogo = (ImageView) mStatusBarView.findViewById(R.id.tesla_logo);
-          if (teslaLogo != null) {
-              teslaLogo.setVisibility(show ? (mTeslaLogo ? View.VISIBLE : View.GONE) : View.GONE);
+          candyLogo = (ImageView) mStatusBarView.findViewById(R.id.candy_logo);
+          if (candyLogo != null) {
+              candyLogo.setVisibility(show ? (mCandyLogo ? View.VISIBLE : View.GONE) : View.GONE);
           }
      }
 

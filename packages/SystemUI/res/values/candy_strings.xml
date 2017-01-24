@@ -82,8 +82,8 @@
     <string name="quick_settings_music_play">Play</string>
     <string name="quick_settings_music_pause">Pause</string>
 
-    <!-- Teslacoil QS Tile -->
-    <string name="quick_settings_teslacoil">TeslaCoil</string>
+    <!-- Candycane QS Tile -->
+    <string name="quick_settings_candycane">CandyCane</string>
 
     <!-- Text to use when the number in a notification info is too large
          (greater than status_bar_notification_info_maxnum, defined in
@@ -133,9 +133,9 @@
     <!-- SystemUI Tuner Parts -->
     <string name="systemui_tuner_statusbar_title">Statusbar items</string>
 
-    <!-- Tesla Logo -->
-    <string name="status_bar_tesla_logo_title">Tesla logo</string>
-    <string name="status_bar_tesla_logo_summary">Enable to show Tesla logo on the left side of the statusbar</string>
+    <!-- Candy Logo -->
+    <string name="status_bar_candy_logo_title">Candy logo</string>
+    <string name="status_bar_candy_logo_summary">Enable to show Candy logo on the left side of the statusbar</string>
 
     <!-- PA Pie controls -->
     <string name="pie_date_format" translatable="false">ccc, dd MMM yyyy</string>
