@@ -2211,8 +2211,8 @@ message MetricsEvent {
     //   SUBTYPE: sub settings classname
     ACTION_SETTING_HELP_AND_FEEDBACK = 496;
 
-    // TeslaCoil
-    TESLACOIL = 497;
+    // CandyCane
+    CANDYCANE = 497;
 
     // Lockscreen weather
     LOCKSCREEN_WEATHER_SETTINGS = 498;
