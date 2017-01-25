@@ -30,15 +30,15 @@ import com.android.systemui.R;
 import com.android.systemui.qs.QSTile;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
 
-/** Quick settings tile: Teslacoil **/
-public class TeslaCoilTile extends QSTile<QSTile.BooleanState> {
+/** Quick settings tile: CandyCane **/
+public class CandyCaneTile extends QSTile<QSTile.BooleanState> {
 
-    private static final Intent TESLACOIL = new Intent().setComponent(new ComponentName(
-            "com.android.settings", "com.android.settings.Settings$TeslaCoilActivity"));
+    private static final Intent CANDYCANE = new Intent().setComponent(new ComponentName(
+            "com.android.settings", "com.android.settings.Settings$CandyCaneActivity"));
 
     private boolean mListening;
 
-    public TeslaCoilTile(Host host) {
+    public CandyCaneTile(Host host) {
         super(host);
     }
 
@@ -54,28 +54,28 @@ public class TeslaCoilTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public void handleClick() {
-        mHost.startActivityDismissingKeyguard(TESLACOIL);
+        mHost.startActivityDismissingKeyguard(CANDYCANE);
     }
 
     @Override
     public CharSequence getTileLabel() {
-        return mContext.getString(R.string.quick_settings_teslacoil);
+        return mContext.getString(R.string.quick_settings_candycane);
     }
 
     @Override
     public Intent getLongClickIntent() {
-        return(TESLACOIL);
+        return(CANDYCANE);
     }
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
-        state.label = mContext.getString(R.string.quick_settings_teslacoil);
-        state.icon = ResourceIcon.get(R.drawable.ic_settings_teslacoil);
+        state.label = mContext.getString(R.string.quick_settings_candycane);
+        state.icon = ResourceIcon.get(R.drawable.ic_settings_candycane);
     }
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.TESLACOIL;
+        return MetricsEvent.CANDYCANE;
 
     }
 } 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.internal.util.tesla;
+package com.android.internal.util.candy;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +25,7 @@ import android.content.res.Resources;
 
 import java.util.Locale;
 
-public class TeslaUtils {
+public class CandyUtils {
 
     public static boolean isChineseLanguage() {
        return Resources.getSystem().getConfiguration().locale.getLanguage().startsWith(

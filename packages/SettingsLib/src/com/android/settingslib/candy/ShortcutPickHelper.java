@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settingslib.tesla;
+package com.android.settingslib.candy;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.android.settingslib.R;
-import com.android.settingslib.tesla.ShortcutPickHelper.AppExpandableAdapter.GroupInfo;
+import com.android.settingslib.candy.ShortcutPickHelper.AppExpandableAdapter.GroupInfo;
 
 public class ShortcutPickHelper {
 

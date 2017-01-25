@@ -86,7 +86,7 @@ public class NavigationBarTile extends QSTile<QSTile.State> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.TESLACOIL;
+        return MetricsEvent.CANDYCANE;
     }
 
     @Override
@@ -228,7 +228,7 @@ public class NavigationBarTile extends QSTile<QSTile.State> {
 
         @Override
         public int getMetricsCategory() {
-            return MetricsEvent.TESLACOIL;
+            return MetricsEvent.CANDYCANE;
         }
 
         @Override

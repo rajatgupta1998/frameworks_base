@@ -101,7 +101,7 @@ public class MusicTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.TESLACOIL;
+        return MetricsEvent.CANDYCANE;
     }
 
     @Override

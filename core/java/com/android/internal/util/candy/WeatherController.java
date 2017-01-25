@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.internal.util.tesla;
+package com.android.internal.util.candy;
 
 import android.graphics.drawable.Drawable;
 

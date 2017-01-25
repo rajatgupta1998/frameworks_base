@@ -43,8 +43,8 @@ import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
 
-import com.android.internal.util.tesla.WeatherController;
-import com.android.internal.util.tesla.WeatherControllerImpl;
+import com.android.internal.util.candy.WeatherController;
+import com.android.internal.util.candy.WeatherControllerImpl;
 import com.android.internal.widget.LockPatternUtils;
 
 import java.util.Date;

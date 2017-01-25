@@ -1,4 +1,4 @@
-package com.android.systemui.tesla;
+package com.android.systemui.candy;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,9 +16,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.android.settingslib.tesla.ShortcutPickHelper;
+import com.android.settingslib.candy.ShortcutPickHelper;
 import com.android.systemui.R;
-import com.android.systemui.tesla.LockscreenShortcutsHelper.Shortcuts;
+import com.android.systemui.candy.LockscreenShortcutsHelper.Shortcuts;
 
 import java.util.ArrayList;
 

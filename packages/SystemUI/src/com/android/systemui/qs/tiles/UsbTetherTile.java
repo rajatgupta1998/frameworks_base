@@ -84,7 +84,7 @@ public class UsbTetherTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.TESLACOIL;
+        return MetricsEvent.CANDYCANE;
     }
 
     private void updateState() {

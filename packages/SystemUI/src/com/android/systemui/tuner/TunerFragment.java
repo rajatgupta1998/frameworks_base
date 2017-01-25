@@ -35,9 +35,9 @@ public class TunerFragment extends PreferenceFragment {
 
     private static final String TAG = "TunerFragment";
 
-    private static final String STATUS_BAR_TESLA_LOGO = "status_bar_tesla_logo";
+    private static final String STATUS_BAR_CANDY_LOGO = "status_bar_candy_logo";
 
-    private SwitchPreference mTeslaLogo;
+    private SwitchPreference mCandyLogo;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,9 +47,9 @@ public class TunerFragment extends PreferenceFragment {
 
         final ContentResolver resolver = getActivity().getContentResolver();
 
-        mTeslaLogo = (SwitchPreference) findPreference(STATUS_BAR_TESLA_LOGO);
-        mTeslaLogo.setChecked((Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_TESLA_LOGO, 0) == 1));
+        mCandyLogo = (SwitchPreference) findPreference(STATUS_BAR_CANDY_LOGO);
+        mCandyLogo.setChecked((Settings.System.getInt(resolver,
+                Settings.System.STATUS_BAR_CANDY_LOGO, 0) == 1));
     }
 
     @Override
@@ -83,10 +83,10 @@ public class TunerFragment extends PreferenceFragment {
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if  (preference == mTeslaLogo) {
+        if  (preference == mCandyLogo) {
             boolean checked = ((SwitchPreference)preference).isChecked();
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.STATUS_BAR_TESLA_LOGO, checked ? 1:0);
+                    Settings.System.STATUS_BAR_CANDY_LOGO, checked ? 1:0);
             return true;
           }
         return super.onPreferenceTreeClick(preference);
