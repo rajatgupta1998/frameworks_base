@@ -251,7 +251,7 @@
                   android:icon="@drawable/tuner"
                   android:theme="@style/TunerSettings"
                   android:label="@string/systemui_tuner_statusbar_title"
-                  android:parentActivityName="com.gzr.candycane.CandyCane"
+                  android:parentActivityName="org.candyroms.candycane.CandyCane"
                   android:process=":tuner"
                   android:exported="true">
         </activity>
