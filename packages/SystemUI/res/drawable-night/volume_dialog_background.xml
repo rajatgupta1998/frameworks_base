@@ -20,7 +20,7 @@
 
 <item>
 	<shape android:shape="rectangle">
-		<solid android:color="#8033b5e5"/>	
+		<solid android:color="#80f21313"/>	
 	</shape>
 </item>
 
