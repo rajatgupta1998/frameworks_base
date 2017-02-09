@@ -256,7 +256,7 @@ public final class Settings {
 
     /**
      * Metadata key: Reason for needing usage access.
-     * <p>66285a86b25961cf506742e53e15890ef0092cc8
+     * <p>
      * A key for metadata attached to an activity that receives action
      * {@link #INTENT_CATEGORY_USAGE_ACCESS_CONFIG}, shown to the
      * user as description of how the app uses usage access.
@@ -4606,13 +4606,6 @@ public final class Settings {
 
         /**
          * Whether to show or hide the expand indicator
-         * Three Finger Gesture from Oppo
-         * @hide
-         */
-        public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
-
-        /**
-         * Toast icon Switch
          * @hide
          */
         public static final String QS_EXPAND_INDICATOR_TOGGLE = "qs_expand_indicator_toggle";
