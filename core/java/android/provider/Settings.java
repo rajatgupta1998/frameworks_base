@@ -7921,7 +7921,14 @@ public final class Settings {
          *
          * @hide
          */
+
         public static final String WEB_ACTION_ENABLED = "web_action_enabled";
+
+        /**
+         * Whether to use one tap QS tile action to enable or disable bluetooth
+         * @hide
+         */
+        public static final String BT_EASY_TOGGLE = "bt_easy_toggle";
 
         /**
          * Launch actions for left/right lockscreen targets

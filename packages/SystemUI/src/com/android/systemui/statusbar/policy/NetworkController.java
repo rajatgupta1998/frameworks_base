@@ -28,6 +28,7 @@ public interface NetworkController {
 
     boolean hasMobileDataFeature();
     boolean isAdvancedDataTileEnabled();
+    boolean isBtEasyToggleEnabled();
     void addSignalCallback(SignalCallback cb);
     void removeSignalCallback(SignalCallback cb);
     void setWifiEnabled(boolean enabled);

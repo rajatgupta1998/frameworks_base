@@ -927,4 +927,12 @@ public class NetworkControllerImpl extends BroadcastReceiver
         return Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.QS_DATA_ADVANCED, 0, ActivityManager.getCurrentUser()) == 1;
     }
+
+    /**
+     * Check the Bluetooth easy toggle tile setting
+     */
+    public boolean isBtEasyToggleEnabled() {
+        return Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.BT_EASY_TOGGLE, 0, ActivityManager.getCurrentUser()) == 1;
+    }
 }
