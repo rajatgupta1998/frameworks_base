@@ -67,4 +67,7 @@
   <java-symbol type="drawable" name="ic_lock_onthego" />
   <java-symbol type="drawable" name="ic_lock_onthego_alpha" />
 
+  <!-- Config IME switcher -->
+  <java-symbol type="bool" name="config_show_IMESwitcher" />
+
 </resources>
