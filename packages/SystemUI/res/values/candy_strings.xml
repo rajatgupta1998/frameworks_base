@@ -177,7 +177,7 @@
     <string name="accessibility_quick_settings_lock_screen_changed_off">Lock screen turned off.</string>
     <!-- Announcement made when lock screen changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_lock_screen_changed_on">Lock screen turned on.</string>
-    
+
         <!-- On The Go -->
     <string name="onthego_notif_ticker">On-The-Go activated</string>
     <string name="onthego_notif_title">On-The-Go is active</string>
@@ -192,5 +192,11 @@
     <!-- To do: Add QS OnTheGo
     <string name="quick_settings_onthego_back">Rear Camera</string>
     <string name="quick_settings_onthego_front">Front Camera</string>-->
-    
- </resources>
+
+    <!-- Expanded Weather -->
+    <string name="omnijaws_service_error">Error</string>
+    <string name="omnijaws_service_unkown">No weather data</string>
+    <string name="omnijaws_detail_header">Weather</string>
+    <string name="omnijaws_label_default">Weather</string>
+    <string name="omnijaws_current_text">Now</string>
+</resources>
