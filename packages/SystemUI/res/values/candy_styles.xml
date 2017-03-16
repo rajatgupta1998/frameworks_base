@@ -42,12 +42,12 @@
     <style name="BatteryMeterViewDrawable.Circle">
         <item name="blendMode">overlay</item>
     </style>
-  
+
     <!-- Statusbar Weather -->
     <style name="TextAppearance.StatusBar.WeatherTemp" parent="@*android:style/TextAppearance.StatusBar">
         <item name="android:textStyle">normal</item>
     </style>
-  
+
    <!-- Expanded Weather -->
     <style name="TextAppearance.StatusBar.Expanded.Weather">
         <item name="android:textSize">12sp</item>
@@ -60,5 +60,5 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">#ffffff</item>
     </style>
-      
+
 </resources>
