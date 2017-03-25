@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     Copyright (c) 2016 Ground Zero Rom
+                  2017 CandyRoms
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -16,6 +17,7 @@
 -->
 
 <resources>
+
     <!-- carrier label color -->
     <color name="status_bar_carrier_color">#FFFFFFFF</color>
 
@@ -28,4 +30,8 @@
 
     <!-- Battery charging color -->
     <color name="system_primary_color">@*android:color/material_blue_grey_900</color>
+
+    <!-- OmniJaws detailed view temperature text -->
+    <color name="omni_jaws_detailed_temperature_color">@android:color/white</color>
+
 </resources>
