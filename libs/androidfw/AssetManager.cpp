@@ -35,6 +35,9 @@
 #include <utils/threads.h>
 #include <utils/Timers.h>
 #include <utils/Trace.h>
+#ifndef _WIN32
+#include <sys/file.h>
+#endif
 
 #include <assert.h>
 #include <dirent.h>
@@ -76,6 +79,7 @@ static volatile int32_t gCount = 0;
 const char* AssetManager::RESOURCES_FILENAME = "resources.arsc";
 const char* AssetManager::IDMAP_BIN = "/system/bin/idmap";
 const char* AssetManager::OVERLAY_DIR = "/vendor/overlay";
+const char* AssetManager::OVERLAY_THEME_DIR_PROPERTY = "ro.boot.vendor.overlay.theme";
 const char* AssetManager::TARGET_PACKAGE_NAME = "android";
 const char* AssetManager::TARGET_APK_PATH = "/system/framework/framework-res.apk";
 const char* AssetManager::IDMAP_DIR = "/data/resource-cache";
@@ -1841,6 +1845,7 @@ ZipFileRO* AssetManager::SharedZip::getZip()
 
 Asset* AssetManager::SharedZip::getResourceTableAsset()
 {
+    AutoMutex _l(gLock);
     ALOGV("Getting from SharedZip %p resource asset %p\n", this, mResourceTableAsset);
     return mResourceTableAsset;
 }
@@ -1850,10 +1855,10 @@ Asset* AssetManager::SharedZip::setResourceTableAsset(Asset* asset)
     {
         AutoMutex _l(gLock);
         if (mResourceTableAsset == NULL) {
-            mResourceTableAsset = asset;
             // This is not thread safe the first time it is called, so
             // do it here with the global lock held.
             asset->getBuffer(true);
+            mResourceTableAsset = asset;
             return asset;
         }
     }

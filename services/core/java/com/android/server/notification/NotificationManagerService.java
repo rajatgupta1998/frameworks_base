@@ -142,7 +142,6 @@ import com.android.server.lights.LightsManager;
 import com.android.server.notification.ManagedServices.ManagedServiceInfo;
 import com.android.server.policy.PhoneWindowManager;
 import com.android.server.statusbar.StatusBarManagerInternal;
-import com.android.server.vr.VrManagerInternal;
 import com.android.server.notification.ManagedServices.UserProfiles;
 
 import libcore.io.IoUtils;
@@ -3713,7 +3712,8 @@ public class NotificationManagerService extends SystemService {
             NotificationRecord childR = mNotificationList.get(i);
             StatusBarNotification childSbn = childR.sbn;
             if ((childSbn.isGroup() && !childSbn.getNotification().isGroupSummary()) &&
-                    childR.getGroupKey().equals(r.getGroupKey())) {
+                    childR.getGroupKey().equals(r.getGroupKey())
+                    && (childR.getFlags() & Notification.FLAG_FOREGROUND_SERVICE) == 0) {
                 EventLogTags.writeNotificationCancel(callingUid, callingPid, pkg, childSbn.getId(),
                         childSbn.getTag(), userId, 0, 0, reason, listenerName);
                 mNotificationList.remove(i);

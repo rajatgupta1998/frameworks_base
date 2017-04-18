@@ -187,9 +187,6 @@ int idmap_scan(const char *target_package_name, const char *target_apk_path,
 {
     String8 filename = String8(idmap_dir);
     filename.appendPath("overlays.list");
-    if (unlink(filename.string()) != 0 && errno != ENOENT) {
-        return EXIT_FAILURE;
-    }
 
     SortedVector<Overlay> overlayVector;
     const size_t N = overlay_dirs->size();
