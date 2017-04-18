@@ -1435,7 +1435,7 @@ public class ApplicationsState {
 
         public void init(Context context) {
             mHidePackageNames = context.getResources()
-                    .getStringArray(R.array.config_hideWhenDisabled_packageNames);
+                .getStringArray(R.array.config_hideWhenDisabled_packageNames);
         }
 
         @Override
@@ -1448,7 +1448,7 @@ public class ApplicationsState {
                 if (!entry.info.enabled) {
                     return false;
                 } else if (entry.info.enabledSetting ==
-                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED) {
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED) {
                     return false;
                 }
             }

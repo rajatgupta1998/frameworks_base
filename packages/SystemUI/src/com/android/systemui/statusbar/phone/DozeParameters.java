@@ -95,6 +95,7 @@ public class DozeParameters {
                 Settings.System.DOZE_PULSE_DURATION_IN, 500,
                     UserHandle.USER_CURRENT);
         }
+
         return pickupOrDoubleTap
                 ? getInt("doze.pulse.duration.in.pickup", R.integer.doze_pulse_duration_in_pickup)
                 : getInt("doze.pulse.duration.in", R.integer.doze_pulse_duration_in);

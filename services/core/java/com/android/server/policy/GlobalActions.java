@@ -147,7 +147,6 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
     private boolean mHasTelephony;
     private boolean mHasVibrator;
     private final boolean mShowSilentToggle;
-
     private final EmergencyAffordanceManager mEmergencyAffordanceManager;
 
     private int mScreenshotDelay;
