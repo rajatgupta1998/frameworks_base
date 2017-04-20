@@ -1781,9 +1781,6 @@ public class TaskStackView extends FrameLayout implements TaskStack.TaskStackCal
                         launchTask, null, INVALID_STACK_ID, false /* screenPinningRequested */));
             }
 
-        final Task launchTask = mStack.getNextLaunchTarget();
-        if (launchTask != null) {
-            launchTask(launchTask);
             MetricsLogger.action(getContext(), MetricsEvent.OVERVIEW_LAUNCH_PREVIOUS_TASK,
                     launchTask.key.getComponent().toString());
         } else if (mStack.getTaskCount() == 0) {

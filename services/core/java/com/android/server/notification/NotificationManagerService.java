@@ -234,7 +234,6 @@ public class NotificationManagerService extends SystemService {
     AudioManagerInternal mAudioManagerInternal;
     @Nullable StatusBarManagerInternal mStatusBar;
     Vibrator mVibrator;
-    private VrManagerInternal mVrManagerInternal;
     private WindowManagerInternal mWindowManagerInternal;
 
     final IBinder mForegroundToken = new Binder();
@@ -1214,7 +1213,6 @@ public class NotificationManagerService extends SystemService {
             // Grab our optional AudioService
             mAudioManager = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);
             mAudioManagerInternal = getLocalService(AudioManagerInternal.class);
-            mVrManagerInternal = getLocalService(VrManagerInternal.class);
             mWindowManagerInternal = LocalServices.getService(WindowManagerInternal.class);
             mZenModeHelper.onSystemReady();
         } else if (phase == SystemService.PHASE_THIRD_PARTY_APPS_CAN_START) {

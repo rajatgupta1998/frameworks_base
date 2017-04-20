@@ -330,10 +330,6 @@ public class KeyguardBottomAreaView extends FrameLayout implements View.OnClickL
         mAffordanceHelper = affordanceHelper;
     }
 
-    public void setAffordanceHelper(KeyguardAffordanceHelper affordanceHelper) {
-        mAffordanceHelper = affordanceHelper;
-    }
-
     public void setUserSetupComplete(boolean userSetupComplete) {
         mUserSetupComplete = userSetupComplete;
         updateCameraVisibility();

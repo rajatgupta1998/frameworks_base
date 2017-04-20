@@ -273,6 +273,7 @@ public class PowerUI extends SystemUI {
                 vibrator.vibrate(250);
             }
         }
+    }
 
     private void initTemperatureWarning() {
         ContentResolver resolver = mContext.getContentResolver();
