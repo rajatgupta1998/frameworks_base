@@ -686,9 +686,10 @@ public class KeyguardViewMediator extends SystemUI {
         IntentFilter filter = new IntentFilter();
         filter.addAction(DELAYED_KEYGUARD_ACTION);
         filter.addAction(DELAYED_LOCK_PROFILE_ACTION);
+        filter.addAction(KEYGUARD_SERVICE_ACTION_STATE_CHANGE);
         filter.addAction(Intent.ACTION_SHUTDOWN);
-
-        mContext.registerReceiver(mBroadcastReceiver, new IntentFilter(KEYGUARD_SERVICE_ACTION_STATE_CHANGE));
+        mContext.enforceCallingOrSelfPermission(
+                android.Manifest.permission.CONTROL_KEYGUARD, null);
 
         mContext.registerReceiver(mBroadcastReceiver, filter);
 

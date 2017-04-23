@@ -898,9 +898,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 case HardkeyActionHandler.MSG_DO_HAPTIC_FB:
                     performHapticFeedbackLw(null,
                             HapticFeedbackConstants.LONG_PRESS, false);
-                case MSG_BACK_DELAYED_PRESS:
-                    backMultiPressAction((Long) msg.obj, msg.arg1);
-                    finishBackKeyPress();
                     break;
             }
         }
@@ -2344,7 +2341,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
             // home button wake
             mHomeWakeScreen = (Settings.System.getIntForUser(resolver,
-                    Settings.System.HOME_BUTTON_WAKE, 1, UserHandle.USER_CURRENT) == 1);                    
+                    Settings.System.HOME_BUTTON_WAKE, 1, UserHandle.USER_CURRENT) == 1);
 
             // volume rocker wake
             mVolumeRockerWake = Settings.System.getIntForUser(resolver,
