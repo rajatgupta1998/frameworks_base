@@ -48,4 +48,6 @@
     <!-- Recents memory bar -->
     <dimen name="recents_membar_spacing">12dp</dimen>
 
+    <!-- Recents task locking button -->
+    <dimen name="recents_task_view_header_lock_button_padding">48dp</dimen>
 </resources>
