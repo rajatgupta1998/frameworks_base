@@ -4747,6 +4747,12 @@ public final class Settings {
         public static final String OMNIJAWS_WEATHER_ICON_PACK = "omnijaws_weather_icon_pack";
 
         /**
+         * Wheter to use corner radius for Slim Recents cards
+         * @hide
+         */
+        public static final String SLIM_RECENTS_CORNER_RADIUS = "slim_recents_corner_radius";
+
+        /**
          * Enable/disable overwrite default value for ambient display
          * @hide
          */
