@@ -25,6 +25,12 @@
     <bool name="config_useDarkBgNotificationTinting_override">false</bool>
     <bool name="config_notificationTinting_override">false</bool>
 
+    <!-- Does the device supports fast charging -->
+    <bool name="config_FastChargingLedSupported">false</bool>
+
+    <!-- Default value for led color when battery is low on charge -->
+    <integer name="config_notificationsFastBatteryARGB">0x0000FF</integer>
+
     <!-- The list of vendor package signatures that should also be considered
          platform signatures, specifically for use on devices with a vendor partition. -->
     <string-array name="config_vendorPlatformSignatures">
