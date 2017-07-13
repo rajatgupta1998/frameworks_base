@@ -31,7 +31,7 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
 
     private final PhoneStatusBarView mView;
     private final float mIconAlphaWhenOpaque;
-    private View mLeftSide, mStatusIcons, mSignalCluster, mBattery, mClock, mNetworkTraffic, mCandyLogo;
+    private View mLeftSide, mStatusIcons, mSignalCluster, mBattery, mClock, mNetworkTraffic, mCandyLogo,  mWeatherTextView, mWeatherImageView;
     private Animator mCurrentAnimation;
 
     public PhoneStatusBarTransitions(PhoneStatusBarView view) {
@@ -49,6 +49,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
         mClock = mView.findViewById(R.id.clock);
         mNetworkTraffic = mView.findViewById(R.id.networkTraffic);
         mCandyLogo = mView.findViewById(R.id.candy_logo);
+        mWeatherTextView = mView.findViewById(R.id.weather_temp);
+        mWeatherImageView = mView.findViewById(R.id.weather_image);
         applyModeBackground(-1, getMode(), false /*animate*/);
         applyMode(getMode(), false /*animate*/);
     }
@@ -95,7 +97,9 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
                     animateTransitionTo(mNetworkTraffic, newAlpha),
                     animateTransitionTo(mBattery, newAlphaBC),
                     animateTransitionTo(mClock, newAlphaBC),
-                    animateTransitionTo(mCandyLogo, newAlphaBC)
+                    animateTransitionTo(mCandyLogo, newAlphaBC),
+                    animateTransitionTo(mWeatherTextView, newAlphaBC),
+                    animateTransitionTo(mWeatherImageView, newAlphaBC)
                     );
             if (isLightsOut(mode)) {
                 anims.setDuration(LIGHTS_OUT_DURATION);
@@ -110,6 +114,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
             mBattery.setAlpha(newAlphaBC);
             mClock.setAlpha(newAlphaBC);
             mCandyLogo.setAlpha(newAlphaBC);
+            mWeatherTextView.setAlpha(newAlphaBC);
+            mWeatherImageView.setAlpha(newAlphaBC);
         }
     }
 }

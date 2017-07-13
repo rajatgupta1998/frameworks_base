@@ -89,8 +89,9 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
     // Candy Logo
     private ImageView mCandyLogo;
 
-    private TextView mWeather;
-    private TextView mWeatherLeft;
+    // Statusbar weather
+    private TextView mWeatherTextView;
+    private ImageView mWeatherImageView;
 
     private int mIconSize;
     private int mIconHPadding;
@@ -156,8 +157,6 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
         mCarrierLabel = (TextView) statusBar.findViewById(R.id.statusbar_carrier_text);
 
         mCandyLogo = (ImageView) statusBar.findViewById(R.id.candy_logo);
-        mWeather = (TextView) statusBar.findViewById(R.id.weather_temp);
-        mWeatherLeft = (TextView) statusBar.findViewById(R.id.left_weather_temp);
         mDarkModeIconColorSingleTone = context.getColor(R.color.dark_mode_icon_color_single_tone);
         mLightModeIconColorSingleTone = context.getColor(R.color.light_mode_icon_color_single_tone);
         mHandler = new Handler();
@@ -166,6 +165,8 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
         loadDimens();
 
         mBatteryLevelView = (BatteryLevelTextView) statusBar.findViewById(R.id.battery_level);
+        mWeatherTextView = (TextView) statusBar.findViewById(R.id.weather_temp);
+        mWeatherImageView = (ImageView) statusBar.findViewById(R.id.weather_image);
 
         TunerService.get(mContext).addTunable(this, ICON_BLACKLIST);
     }
@@ -346,21 +347,11 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
     public void hideSystemIconArea(boolean animate) {
         animateHide(mSystemIconArea, animate);
         animateHide(mCenterClockLayout, animate);
-        if (Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_WEATHER_TEMP_STYLE, 0,
-                UserHandle.USER_CURRENT) == 1) {
-        animateHide(mWeatherLeft,animate);
-        } 
     }
 
     public void showSystemIconArea(boolean animate) {
         animateShow(mSystemIconArea, animate);
         animateShow(mCenterClockLayout, animate);
-        if (Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_WEATHER_TEMP_STYLE, 0,
-                UserHandle.USER_CURRENT) == 1) {
-        animateShow(mWeatherLeft,animate);
-        }
     }
 
     public void hideNotificationIconArea(boolean animate) {
@@ -584,12 +575,8 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
 	mNetworkTraffic.setDarkIntensity(mDarkIntensity);
         mCandyLogo.setImageTintList(ColorStateList.valueOf(mIconTint));
         mBatteryLevelView.setTextColor(getTint(mTintArea, mBatteryLevelView, mIconTint));
-        if (Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_WEATHER_COLOR, 0xFFFFFFFF,
-                UserHandle.USER_CURRENT) == 0xFFFFFFFF) {
-        mWeather.setTextColor(mIconTint);
-        mWeatherLeft.setTextColor(mIconTint);
-        }
+        mWeatherTextView.setTextColor(mIconTint);
+        mWeatherImageView.setImageTintList(ColorStateList.valueOf(mIconTint));
     }
 
     public void appTransitionPending() {

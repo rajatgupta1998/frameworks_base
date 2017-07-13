@@ -56,18 +56,6 @@
             android:scaleType="center"
             android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/left_weather_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:singleLine="true"
-            android:gravity="center"
-            android:textAppearance="@style/TextAppearance.StatusBar.WeatherTemp"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
-            android:visibility="gone"
-            />
-
         <!-- The alpha of this area is controlled from both PhoneStatusBarTransitions and
              PhoneStatusBar (DISABLE_NOTIFICATION_ICONS). -->
         <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
@@ -83,23 +71,29 @@
             android:orientation="horizontal"
             >
 
-         <TextView
-            android:id="@+id/weather_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:singleLine="true"
-            android:gravity="right|center_vertical"
-            android:textAppearance="@style/TextAppearance.StatusBar.WeatherTemp"
-            android:paddingStart="2dp"
-            android:paddingEnd="4dp"
-            android:visibility="gone" />
-
             <com.android.systemui.statusbar.policy.NetworkTraffic
                 android:id="@+id/networkTraffic"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:singleLine="false"
                 android:gravity="right|center_vertical"/>
+
+            <com.android.systemui.candy.statusbarweather.StatusBarWeather
+                android:id="@+id/weather_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.StatusBar.Expanded.Weather.Detailed"
+                android:gravity="right|center_vertical"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp" />
+
+            <com.android.systemui.candy.statusbarweather.StatusBarWeatherImage
+                android:id="@+id/weather_image"
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp" />
 
             <include layout="@layout/system_icons" />
 

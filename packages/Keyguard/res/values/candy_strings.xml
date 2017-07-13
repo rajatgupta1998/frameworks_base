@@ -13,6 +13,6 @@
 -->
 <resources>
 
-    <string name="weather_info_not_available">Weather informations not available</string>
+    <string name="weather_info_not_available">Weather info not available</string>
 
 </resources>
