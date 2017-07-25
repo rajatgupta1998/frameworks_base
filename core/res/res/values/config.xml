@@ -2772,4 +2772,8 @@
 
     <!-- Whether notify fingerprint client of successful cancelled authentication -->
     <bool name="config_notifyClientOnFingerprintCancelSuccess">false</bool>
+
+    <!-- Add VoLTE preferred function control flag -->
+    <bool name="config_volte_preferred">false</bool>
+
 </resources>
