@@ -18,6 +18,7 @@
 package com.android.systemui.qs.tiles;
 
 import android.content.Context;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -26,8 +27,8 @@ import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +36,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.util.Log;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.util.candy.CandyUtils;
 import com.android.systemui.R;
 import com.android.systemui.omni.DetailedWeatherView;
 import com.android.systemui.omni.OmniJawsClient;
@@ -147,7 +150,15 @@ public class WeatherTile extends QSTile<QSTile.BooleanState> implements OmniJaws
 
     @Override
     public Intent getLongClickIntent() {
-        return mWeatherClient.getSettingsIntent();
+        if (CandyUtils.isPackageInstalled(mContext, "com.google.android.googlequicksearchbox")) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("dynact://velour/weather/ProxyActivity"));
+            intent.setComponent(new ComponentName("com.google.android.googlequicksearchbox",
+                    "com.google.android.apps.gsa.velour.DynamicActivityTrampoline"));
+            return intent;
+        } else {
+            return mWeatherClient.getSettingsIntent();
+        }
     }
 
     @Override
