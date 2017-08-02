@@ -33,4 +33,7 @@
     <color name="material_blue_grey_800">#ff000000</color>
     <color name="material_blue_grey_900">#ff000000</color>
     <color name="material_blue_grey_950">#ff000000</color>
+
+    <color name="material_pixel_blue_light">#ff000000</color>
+    <color name="material_pixel_blue_dark">#ff000000</color>
 </resources>
