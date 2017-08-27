@@ -248,18 +248,18 @@ public class Camera {
      * Returns the number of physical cameras available on this device.
      */
     public static int getNumberOfCameras() {
-        boolean exposeAuxCamera = true;
+        boolean exposeAuxCamera = false;
         String packageName = ActivityThread.currentOpPackageName();
-        /* Force exposing only two cameras
-         * if the package name falls in this bucket
+        /* Force to expose only two cameras
+         * if the package name does not falls in this bucket
          */
-        String packageList = SystemProperties.get("camera.auxdisable.packagelist");
+        String packageList = SystemProperties.get("camera.aux.packagelist");
         if (packageList.length() > 0) {
             TextUtils.StringSplitter splitter = new TextUtils.SimpleStringSplitter(',');
             splitter.setString(packageList);
             for (String str : splitter) {
                 if (packageName.equals(str)) {
-                    exposeAuxCamera = false;
+                    exposeAuxCamera = true;
                     break;
                 }
             }
