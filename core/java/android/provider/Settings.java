@@ -4690,7 +4690,19 @@ public final class Settings {
          */
         public static final String SCREENSHOT_EDIT_USER_APP = "screenshot_edit_user_app";
 
-        /** End of ABC system settings**/
+        /**
+         * Enable blocking wakelock
+         * @hide
+         */
+        public static final String WAKELOCK_BLOCKING_ENABLED = "wakelock_blocking_enabled";
+
+        /**
+         * List of wakelock blocks selected
+         * @hide
+         */
+        public static final String WAKELOCK_BLOCKING_LIST = "wakelock_blocking_list";
+
+        /** End of CANDY system settings**/
 
         /**
          * Whether to change the transparency of the qs panel
