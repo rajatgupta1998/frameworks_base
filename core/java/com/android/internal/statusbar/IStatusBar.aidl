@@ -117,7 +117,7 @@ oneway interface IStatusBar
     void handleSystemNavigationKey(in int key);
 
     /**
-     * Gzosp
+     * Candy
      */
     void toggleCameraFlash();
 }
