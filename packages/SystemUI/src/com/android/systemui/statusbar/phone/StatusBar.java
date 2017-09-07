@@ -5738,6 +5738,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_SHOW_TICKER),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.AMBIENT_DOZE_CUSTOM_BRIGHTNESS),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -5779,6 +5782,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.STATUS_BAR_SHOW_TICKER))) {
                 updateTickerSettings();
                 initTickerView();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.AMBIENT_DOZE_CUSTOM_BRIGHTNESS))) {
+                updateDozeBrightness();
             }
         }
 
@@ -5791,6 +5797,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateRecentsIconPack();
             updateRecentsMode();
             updateTickerSettings();
+            updateDozeBrightness();
         }
     }
 
@@ -5882,6 +5889,15 @@ public class StatusBar extends SystemUI implements DemoMode,
             }
         }
     };
+
+    private void updateDozeBrightness() {
+        int defaultDozeBrightness = mContext.getResources().getInteger(
+                com.android.internal.R.integer.config_screenBrightnessDoze);
+        int customDozeBrightness = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.AMBIENT_DOZE_CUSTOM_BRIGHTNESS, defaultDozeBrightness,
+                UserHandle.USER_CURRENT);
+        StatusBarWindowManager.updateCustomBrightnessDozeValue(customDozeBrightness);
+    }
 
     private RemoteViews.OnClickHandler mOnClickHandler = new RemoteViews.OnClickHandler() {
 
