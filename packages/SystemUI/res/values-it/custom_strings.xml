@@ -21,4 +21,6 @@
     <string name="global_action_restart_advanced">Riavvio avanzato</string>
     <string name="global_action_restart_recovery">Vai alla recovery</string>
     <string name="global_action_restart_bootloader">Vai al bootloader</string>
+
+    <string name="recents_app_killed">App terminata</string>
 </resources>

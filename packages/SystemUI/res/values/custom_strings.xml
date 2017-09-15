@@ -24,4 +24,6 @@
 
     <string name="summary_empty" translatable="false"></string>
 
+    <string name="recents_app_killed">App killed</string>
+
 </resources>
