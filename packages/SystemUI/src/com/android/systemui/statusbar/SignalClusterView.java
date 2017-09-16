@@ -184,13 +184,15 @@ public class SignalClusterView extends LinearLayout implements NetworkController
             boolean blockWifi = blockList.contains(SLOT_WIFI);
             boolean blockEthernet = blockList.contains(SLOT_ETHERNET);
             boolean blockVpn = blockList.contains(SLOT_VPN);
+            boolean blockVolte = blockList.contains(SLOT_VOLTE);
 
             if (blockAirplane != mBlockAirplane || blockMobile != mBlockMobile
-                    || blockEthernet != mBlockEthernet || blockWifi != mBlockWifi) {
+                    || blockEthernet != mBlockEthernet || blockWifi != mBlockWifi || blockVolte != mBlockVolte) {
                 mBlockAirplane = blockAirplane;
                 mBlockMobile = blockMobile;
                 mBlockEthernet = blockEthernet;
                 mBlockWifi = blockWifi || mForceBlockWifi;
+                mBlockVolte = blockVolte;
                 // Re-register to get new callbacks.
                 mNetworkController.removeCallback(this);
                 mNetworkController.addCallback(this);
