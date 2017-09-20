@@ -10316,12 +10316,6 @@ public final class Settings {
          */
         @Deprecated
         public static final String SHOW_PROCESSES = "show_processes";
-        
-        /**
-         * Control whether the process CPU info meter should be shown.
-         * @hide
-         */
-        public static final String SHOW_CPU = "show_cpu";
 
         /**
          * If 1 low power mode is enabled.
