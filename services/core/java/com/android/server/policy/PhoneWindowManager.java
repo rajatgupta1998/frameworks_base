@@ -3970,6 +3970,18 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             return -1;
         }
 
+        // Specific device key handling
+        if (mDeviceKeyHandler != null) {
+            try {
+                // The device only should consume known keys.
+                if (mDeviceKeyHandler.handleKeyEvent(event)) {
+                    return -1;
+                }
+            } catch (Exception e) {
+                Slog.w(TAG, "Could not dispatch event to device key handler", e);
+            }
+        }
+
         if (down) {
             long shortcutCode = keyCode;
             if (event.isCtrlPressed()) {
@@ -6312,8 +6324,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 wakeUp(event.getEventTime(), mAllowTheaterModeWakeFromKey,
                        "android.policy:KEY", true);
             }
-
-       return result;
+            return result;
         }
 
         boolean useHapticFeedback = down
