@@ -1561,7 +1561,12 @@ public interface WindowManagerPolicy {
     /**
      * Send some ActionHandler commands to WindowManager.
      */
-    public void sendCandyAction(Intent intent);
+    public void sendCustomAction(Intent intent);
+
+    /**
+     * Send some ActionHandler commands to WindowManager.
+    
+    public void sendCandyAction(Intent intent); */
 
     /**
      * Lock the device now.
