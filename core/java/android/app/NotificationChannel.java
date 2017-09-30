@@ -123,6 +123,8 @@ public final class NotificationChannel implements Parcelable {
     };
 
     private static final int DEFAULT_LIGHT_COLOR = 0;
+    private static final int DEFAULT_ON_TIME = 0;
+    private static final int DEFAULT_OFF_TIME = 0;
     private static final int DEFAULT_VISIBILITY =
             NotificationManager.VISIBILITY_NO_OVERRIDE;
     private static final int DEFAULT_IMPORTANCE =
