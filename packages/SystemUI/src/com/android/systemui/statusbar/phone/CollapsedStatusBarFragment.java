@@ -25,6 +25,7 @@ import android.app.StatusBarManager;
 import android.content.ContentResolver;
 import android.database.ContentObserver;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
@@ -80,6 +81,10 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private View mCustomCarrierLabel;
     private int mShowCarrierLabel;
 
+    // Candy Status Logo
+    private View mCandyLogo;
+    private boolean mShowLogo;
+
     private final Handler mHandler = new Handler();
 
     private class SettingsObserver extends ContentObserver {
@@ -90,12 +95,17 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_SHOW_CARRIER),
                     false, this, UserHandle.USER_ALL);
+            getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_LOGO),
+                    false, this, UserHandle.USER_ALL);
         }
-         @Override
+
+        @Override
         public void onChange(boolean selfChange) {
             updateSettings(true);
         }
     }
+
     private SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
 
     private SignalCallback mSignalCallback = new SignalCallback() {
@@ -172,6 +182,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mCenterClockLayout = (LinearLayout) mStatusBar.findViewById(R.id.center_clock_layout);
         Dependency.get(DarkIconDispatcher.class).addDarkReceiver(mSignalClusterView);
         mCustomCarrierLabel = mStatusBar.findViewById(R.id.statusbar_carrier_text);
+        mCandyLogo = mStatusBar.findViewById(R.id.status_bar_logo);
         updateSettings(false);
         // Default to showing until we know otherwise.
         showSystemIconArea(false);
@@ -290,11 +301,17 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     public void hideNotificationIconArea(boolean animate) {
         animateHide(mNotificationIconAreaInner, animate, true);
         animateHide(mCenterClockLayout, animate, true);
+        if (mShowLogo) {
+            animateHide(mCandyLogo, animate, true);
+        }
     }
 
     public void showNotificationIconArea(boolean animate) {
         animateShow(mNotificationIconAreaInner, animate);
         animateShow(mCenterClockLayout, animate);
+        if (mShowLogo) {
+            animateShow(mCandyLogo, animate);
+        }
     }
 
     public void hideCarrierName(boolean animate) {
@@ -390,7 +407,18 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mShowCarrierLabel = Settings.System.getIntForUser(
                 getContext().getContentResolver(), Settings.System.STATUS_BAR_SHOW_CARRIER, 1,
                 UserHandle.USER_CURRENT);
-        setCarrierLabel(animate);
+        mShowLogo = Settings.System.getIntForUser(
+                getContext().getContentResolver(), Settings.System.STATUS_BAR_LOGO, 0,
+                UserHandle.USER_CURRENT) == 1;
+        if (mNotificationIconAreaInner != null) {
+            if (mShowLogo) {
+                if (mNotificationIconAreaInner.getVisibility() == View.VISIBLE) {
+                    animateShow(mCandyLogo, animate);
+                }
+            } else {
+                animateHide(mCandyLogo, animate, false);
+            }
+        }
     }
 
     private void setCarrierLabel(boolean animate) {
@@ -400,4 +428,4 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             animateHide(mCustomCarrierLabel, animate, false);
         }
     }
-}
+ }
