@@ -83,7 +83,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
     // Candy Status Logo
     private View mCandyLogo;
-    private boolean mShowLogo;
+    private int mShowLogo;
+    private View mCandyLogoRight;
 
     private final Handler mHandler = new Handler();
 
@@ -183,6 +184,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         Dependency.get(DarkIconDispatcher.class).addDarkReceiver(mSignalClusterView);
         mCustomCarrierLabel = mStatusBar.findViewById(R.id.statusbar_carrier_text);
         mCandyLogo = mStatusBar.findViewById(R.id.status_bar_logo);
+        mCandyLogoRight = mStatusBar.findViewById(R.id.status_bar_logo_right);
         updateSettings(false);
         // Default to showing until we know otherwise.
         showSystemIconArea(false);
@@ -291,18 +293,24 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     public void hideSystemIconArea(boolean animate) {
         animateHide(mSystemIconArea, animate, true);
         animateHide(mCenterClockLayout, animate, true);
+        if (mShowLogo == 2) {
+            animateHide(mCandyLogoRight, animate, false);
+        }
     }
 
     public void showSystemIconArea(boolean animate) {
         animateShow(mSystemIconArea, animate);
         animateShow(mCenterClockLayout, animate);
+        if (mShowLogo == 2) {
+            animateShow(mCandyLogoRight, animate);
+        }
     }
 
     public void hideNotificationIconArea(boolean animate) {
         animateHide(mNotificationIconAreaInner, animate, true);
         animateHide(mCenterClockLayout, animate, true);
-        if (mShowLogo) {
-            animateHide(mCandyLogo, animate, true);
+        if (mShowLogo == 1) {
+            animateHide(mCandyLogo, animate, false);
         }
     }
 
@@ -323,6 +331,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     public void showCarrierName(boolean animate) {
         if (mCustomCarrierLabel != null) {
             setCarrierLabel(animate);
+        if (mShowLogo == 1) {
+            animateShow(mCandyLogo, animate);
         }
     }
 
@@ -409,14 +419,23 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                 UserHandle.USER_CURRENT);
         mShowLogo = Settings.System.getIntForUser(
                 getContext().getContentResolver(), Settings.System.STATUS_BAR_LOGO, 0,
-                UserHandle.USER_CURRENT) == 1;
+                UserHandle.USER_CURRENT);
         if (mNotificationIconAreaInner != null) {
-            if (mShowLogo) {
+            if (mShowLogo == 1) {
                 if (mNotificationIconAreaInner.getVisibility() == View.VISIBLE) {
                     animateShow(mCandyLogo, animate);
                 }
-            } else {
+            } else if (mShowLogo != 1) {
                 animateHide(mCandyLogo, animate, false);
+            }
+        }
+        if (mSystemIconArea != null) {
+            if (mShowLogo == 2) {
+                if (mSystemIconArea.getVisibility() == View.VISIBLE) {
+                    animateShow(mCandyLogoRight, animate);
+                }
+            } else if (mShowLogo != 2) {
+                animateHide(mCandyLogoRight, animate, false);
             }
         }
     }
