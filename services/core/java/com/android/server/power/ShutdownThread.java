@@ -49,7 +49,7 @@ import android.system.ErrnoException;
 import android.system.Os;
 
 import com.android.internal.telephony.ITelephony;
-import com.android.internal.util.gzosp.Helpers;
+import com.android.internal.util.candy.Helpers;
 import com.android.server.pm.PackageManagerService;
 
 import android.util.Log;
