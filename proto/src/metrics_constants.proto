@@ -3979,5 +3979,12 @@ message MetricsEvent {
 
     // GZOSP custom constants
     GZOSP = 1500;
+
+    // CandyRoms custom constants
+    // Candy
+    CANDY = 1501;
+
+    // CandyShop
+    CANDYSHOP = 1502;
   }
 }
