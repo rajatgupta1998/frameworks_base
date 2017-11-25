@@ -888,6 +888,8 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     private static final int MSG_DISPATCH_VOLKEY_WITH_WAKE_LOCK = 25;
     private static final int MSG_TOGGLE_TORCH = 26;
 
+    private boolean mHasPermanentMenuKey;
+
     private class PolicyHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
@@ -993,11 +995,11 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 case HardkeyActionHandler.MSG_FIRE_HOME:
                     launchHomeFromHotKey();
                     break;
-//                case HardkeyActionHandler.MSG_UPDATE_MENU_KEY:
-//                    synchronized (mLock) {
-//                        mHasPermanentMenuKey = msg.arg1 == 1;
-//                    }
-//                    break;
+                case HardkeyActionHandler.MSG_UPDATE_MENU_KEY:
+                    synchronized (mLock) {
+                        mHasPermanentMenuKey = msg.arg1 == 1;
+                    }
+                    break;
                 case HardkeyActionHandler.MSG_DO_HAPTIC_FB:
                     performHapticFeedbackLw(null,
                             HapticFeedbackConstants.LONG_PRESS, false);
@@ -8552,6 +8554,11 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 mHandler.post(mScreenrecordRunnable);
             }*/
         }
+    }
+
+    @Override
+    public boolean hasPermanentMenuKey() {
+        return !hasNavigationBar() && mHasPermanentMenuKey;
     }
 
     @Override
