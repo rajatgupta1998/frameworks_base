@@ -235,10 +235,8 @@ public class NotificationPanelView extends PanelView implements
     private boolean mNoVisibleNotifications = true;
     private ValueAnimator mDarkAnimator;
 
-    private GestureDetector mLockscreenDoubleTapToSleep;
-    private boolean mIsLockscreenDoubleTapEnabled;
-
     private GestureDetector mDoubleTapToSleepGesture;
+    private boolean mIsLockscreenDoubleTapEnabled;
 
     private int mStatusBarHeaderHeight;
 
@@ -795,10 +793,6 @@ public class NotificationPanelView extends PanelView implements
     public boolean onTouchEvent(MotionEvent event) {
         if (mBlockTouches || (mQs != null && mQs.isCustomizing())) {
             return false;
-        }
-        if (mIsLockscreenDoubleTapEnabled
-                && mStatusBarState == StatusBarState.KEYGUARD) {
-            mLockscreenDoubleTapToSleep.onTouchEvent(event);
         }
         if ((mIsLockscreenDoubleTapEnabled
                 && mStatusBarState == StatusBarState.KEYGUARD) ||

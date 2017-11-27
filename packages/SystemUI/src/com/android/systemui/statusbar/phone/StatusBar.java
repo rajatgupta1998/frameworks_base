@@ -850,6 +850,8 @@ public class StatusBar extends SystemUI implements DemoMode,
         createAndAddWindows();
 
         mSettingsObserver.onChange(false); // set up
+        mCandySettingsObserver.observe();
+        mCandySettingsObserver.update();
         mCommandQueue.disable(switches[0], switches[6], false /* animate */);
         setSystemUiVisibility(switches[1], switches[7], switches[8], 0xffffffff,
                 fullscreenStackBounds, dockedStackBounds);
@@ -5426,9 +5428,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         public void onChange(boolean selfChange, Uri uri) {
             if (uri.equals(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN))) {
-                setLockscreenDoubleTapToSleep();
-            } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.DOUBLE_TAP_SLEEP_LOCKSCREEN))) {
                 setStatusBarWindowViewOptions();
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_QUICK_QS_PULLDOWN))) {
@@ -5458,19 +5457,11 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
 
         public void update() {
-            setLockscreenDoubleTapToSleep();
             setStatusBarWindowViewOptions();
             setLockscreenMediaMetadata();
             setStatusbarBatterySaverColor();
             setQsPanelOptions();
             updateQsPanelResources();
-        }
-    }
-
-    private void setLockscreenDoubleTapToSleep() {
-        if (mStatusBarWindow != null) {
-            mStatusBarWindow.setLockscreenDoubleTapToSleep();
-            setStatusBarWindowViewOptions();
         }
     }
 
