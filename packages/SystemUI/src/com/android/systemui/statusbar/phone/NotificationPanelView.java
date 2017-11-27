@@ -239,7 +239,6 @@ public class NotificationPanelView extends PanelView implements
     private boolean mIsLockscreenDoubleTapEnabled;
 
     private GestureDetector mDoubleTapToSleepGesture;
-    private boolean mIsLockscreenDoubleTapEnabled;
 
     private int mStatusBarHeaderHeight;
 
@@ -249,7 +248,7 @@ public class NotificationPanelView extends PanelView implements
         mFalsingManager = FalsingManager.getInstance(context);
         mQsOverscrollExpansionEnabled =
                 getResources().getBoolean(R.bool.config_enableQuickSettingsOverscrollExpansion);
-        mLockscreenDoubleTapToSleep = new GestureDetector(context,
+
         mDoubleTapToSleepGesture = new GestureDetector(context,
                 new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -800,6 +799,7 @@ public class NotificationPanelView extends PanelView implements
         if (mIsLockscreenDoubleTapEnabled
                 && mStatusBarState == StatusBarState.KEYGUARD) {
             mLockscreenDoubleTapToSleep.onTouchEvent(event);
+        }
         if ((mIsLockscreenDoubleTapEnabled
                 && mStatusBarState == StatusBarState.KEYGUARD) ||
                 (!mQsExpanded && mDoubleTapToSleepEnabled
