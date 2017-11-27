@@ -702,4 +702,11 @@ public class QSPanel extends LinearLayout implements Tunable, Callback {
             Settings.System.SCREEN_BRIGHTNESS, 255);
         }
     }
+
+    public void updateSettings() {
+        if (mFooter != null) {
+            mFooter.updateSettings();
+
+        }
+    }
 }
