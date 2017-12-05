@@ -69,18 +69,24 @@
 
     <string name="statusbar_items_title">Statusbar icon</string>
 
-    <!-- Screenshot QS tile -->
-    <string name="quick_settings_screenshot_label">Screenshot</string>
-    <string name="quick_settings_region_screenshot_label">Partial screenshot</string>
-
     <!-- SysUI Tuner -->
     <string name="statusbar_icons_blacklist">Status bar icons</string>
     <string name="navbar_tuner_activity">Navigation bar buttons</string>
     <string name="lockscreen_tuner_activity">Lockscreen shortcuts</string>
     <string name="powernotif_tuner_activity">Power notifications</string>
 
+    <!-- PiP Tile -->
+    <string name="quick_settings_pip_label">PiP</string>
+
+    <!-- Ambient display and lift gesture Tile -->
+    <string name="quick_settings_doze_notifications_label">Ambient notifications</string>
+
     <!-- Caffeine QS Tile -->
     <string name="quick_settings_caffeine_label">Caffeine</string>
     <string name="accessibility_quick_settings_caffeine_off">Caffeine off</string>
     <string name="accessibility_quick_settings_caffeine_on">Caffeine on</string>
+
+    <!-- Screenshot QS tile -->
+    <string name="quick_settings_screenshot_label">Screenshot</string>
+    <string name="quick_settings_region_screenshot_label">Partial screenshot</string>
 </resources>
