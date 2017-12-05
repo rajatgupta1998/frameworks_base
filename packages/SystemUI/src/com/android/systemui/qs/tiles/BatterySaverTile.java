@@ -64,11 +64,6 @@ public class BatterySaverTile extends QSTileImpl<BooleanState> implements
     }
 
     @Override
-    public DetailAdapter getDetailAdapter() {
-        return mBatteryDetail;
-    }
-
-    @Override
     public BooleanState newTileState() {
         return new BooleanState();
     }
@@ -102,18 +97,7 @@ public class BatterySaverTile extends QSTileImpl<BooleanState> implements
 
     @Override
     protected void handleClick() {
-        mHasDashCharger = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_hasDashCharger);
-        mDashCharger = mHasDashCharger && isDashCharger();
-
-        if (!mDashCharger && !mCharging) {
-            mBatteryController.setPowerSaveMode(!mPowerSave);
-        }
-    }
-
-    @Override
-    protected void handleSecondaryClick() {
-        showDetail(true);
+        mBatteryController.setPowerSaveMode(!mPowerSave);
     }
 
     @Override
@@ -127,25 +111,6 @@ public class BatterySaverTile extends QSTileImpl<BooleanState> implements
                 : mPowerSave ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE;
         state.icon = ResourceIcon.get(R.drawable.ic_qs_battery_saver);
         state.label = mContext.getString(R.string.battery_detail_switch_title);
-        state.dualTarget = true;
-        state.state = mPowerSave ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE;
-
-        mHasDashCharger = mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_hasDashCharger);
-        mDashCharger = mHasDashCharger && isDashCharger();
-
-        if (mCharging) {
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_battery_saver_charging);
-            state.label = mContext.getString(R.string.keyguard_plugged_in);
-        }
-        if (mDashCharger) {
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_battery_saver_charging);
-            state.label = mContext.getString(R.string.keyguard_plugged_in_dash_charging);
-        }
-        if (!mDashCharger && !mCharging) {
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_battery_saver);
-            state.label = mLevel + "%";
-        }
         state.contentDescription = state.label;
         state.value = mPowerSave;
         state.expandedAccessibilityClassName = Switch.class.getName();
@@ -311,19 +276,5 @@ public class BatterySaverTile extends QSTileImpl<BooleanState> implements
                 postBindView();
             }
         };
-    }
-
-    private boolean isDashCharger() {
-        try {
-            FileReader file = new FileReader("/sys/class/power_supply/battery/fastchg_status");
-            BufferedReader br = new BufferedReader(file);
-            String state = br.readLine();
-            br.close();
-            file.close();
-            return "1".equals(state);
-        } catch (FileNotFoundException e) {
-        } catch (IOException e) {
-        }
-        return false;
     }
 }
