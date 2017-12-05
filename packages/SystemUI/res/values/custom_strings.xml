@@ -26,12 +26,6 @@
 
     <string name="recents_app_killed">App killed</string>
 
-    <!-- Sound QS Tile -->
-    <string name="quick_settings_sound_label">Sound</string>
-    <string name="quick_settings_sound_ring">Ring</string>
-    <string name="quick_settings_sound_vibrate">Vibrate</string>
-    <string name="quick_settings_sound_dnd">Do not disturb</string>
-
     <!-- Volume QS Tile -->
     <string name="accessibility_quick_settings_volume_panel">Volume</string>
     <string name="quick_settings_volume_panel_label">Volume</string>
@@ -94,4 +88,11 @@
     <string name="accessibility_quick_settings_location_battery_saving">Location reporting: battery saving mode.</string>
     <string name="accessibility_quick_settings_location_gps_only">Location reporting: sensors only mode.</string>
     <string name="accessibility_quick_settings_location_high_accuracy">Location reporting: high accuracy mode.</string>
+
+     <!-- Sound QS Tile -->
+     <string name="quick_settings_sound_label">Sound</string>
+     <string name="quick_settings_sound_ring">Ring</string>
+     <string name="quick_settings_sound_vibrate">Vibrate</string>
+     <string name="quick_settings_sound_dnd">Do not disturb</string>
+
 </resources>
