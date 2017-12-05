@@ -23,4 +23,6 @@
     <string name="global_action_restart_bootloader">Vai al bootloader</string>
 
     <string name="recents_app_killed">App terminata</string>
+
+    <string name="quick_settings_doze_notifications_label">Notifiche Ambient</string>
 </resources>

@@ -78,9 +78,6 @@
     <!-- PiP Tile -->
     <string name="quick_settings_pip_label">PiP</string>
 
-    <!-- Ambient display and lift gesture Tile -->
-    <string name="quick_settings_doze_notifications_label">Ambient notifications</string>
-
     <!-- Caffeine QS Tile -->
     <string name="quick_settings_caffeine_label">Caffeine</string>
     <string name="accessibility_quick_settings_caffeine_off">Caffeine off</string>
@@ -89,4 +86,7 @@
     <!-- Screenshot QS tile -->
     <string name="quick_settings_screenshot_label">Screenshot</string>
     <string name="quick_settings_region_screenshot_label">Partial screenshot</string>
+
+    <!-- Ambient display and lift gesture Tile -->
+    <string name="quick_settings_doze_notifications_label">Ambient notifications</string>
 </resources>
