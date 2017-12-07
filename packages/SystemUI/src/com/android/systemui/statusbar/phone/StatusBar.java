@@ -5810,7 +5810,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateQsPanelResources();
             updateRecentsIconPack();
             updateRecentsMode();
-            updateTickerSettings();
             updateDozeBrightness();
             setUseLessBoringHeadsUp();
         }
