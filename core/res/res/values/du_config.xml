@@ -49,4 +49,7 @@
          Used to decide if the user can change the colors -->
     <bool name="config_multiColorNotificationLed">false</bool>
 
+    <!-- Whether the device supports Smart Pixels -->
+    <bool name="config_enableSmartPixels">false</bool>
+
 </resources>
