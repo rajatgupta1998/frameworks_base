@@ -4694,6 +4694,12 @@ public final class Settings {
         public static final String SHOW_CLEAR_ALL_RECENTS = "show_clear_all_recents";
 
         /**
+         * Custom header image provider
+         * @hide
+         */
+        public static final String STATUS_BAR_FILE_HEADER_IMAGE = "status_bar_file_header_image";
+
+        /**
          * location of the clear all rectents button
          * @hide
          */
