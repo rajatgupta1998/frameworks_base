@@ -354,7 +354,7 @@ private View mRunningServicesButton;
         } else if (v == mDateTimeGroup) {
             Dependency.get(MetricsLogger.class).action(ACTION_QS_DATE,
                     mNextAlarm != null);
-            if (mNextAlarm != null) {
+            if (mNextAlarm != null && mNextAlarm.getShowIntent() != null) {
                 PendingIntent showIntent = mNextAlarm.getShowIntent();
                 mActivityStarter.startPendingIntentDismissingKeyguard(showIntent);
             } else {
