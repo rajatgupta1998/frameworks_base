@@ -157,6 +157,7 @@ public class BatteryMeterView extends LinearLayout implements
 
     private boolean forcePercentageQsHeader() {
         return mQsHeaderOrKeyguard && (mStyle == BatteryMeterDrawableBase.BATTERY_STYLE_PORTRAIT
+                || mStyle == BatteryMeterDrawableBase.BATTERY_STYLE_HIDDEN
                 || mStyle == BatteryMeterDrawableBase.BATTERY_STYLE_TEXT);
     }
 
@@ -235,7 +236,8 @@ public class BatteryMeterView extends LinearLayout implements
     private void updateShowPercent() {
         final boolean showing = mBatteryPercentView != null;
         if (forcePercentageQsHeader()
-                || (mShowPercentText || mForceShowPercent)) {
+                || (mStyle != BatteryMeterDrawableBase.BATTERY_STYLE_HIDDEN
+                && (mShowPercentText || mForceShowPercent))) {
             if (!showing) {
                 mBatteryPercentView = loadPercentView();
                 if (mTextColor != 0) mBatteryPercentView.setTextColor(mTextColor);
@@ -334,6 +336,7 @@ public class BatteryMeterView extends LinearLayout implements
 
         switch (style) {
             case BatteryMeterDrawableBase.BATTERY_STYLE_TEXT:
+            case BatteryMeterDrawableBase.BATTERY_STYLE_HIDDEN:
                 if (mBatteryIconView != null) {
                     removeView(mBatteryIconView);
                     mBatteryIconView = null;
