@@ -45,4 +45,6 @@
   <!-- LED pulse -->
   <java-symbol type="bool" name="config_ledCanPulse" />
 
+  <!-- System fonts -->
+  <java-symbol type="array" name="config_fontPackages" />
 </resources>
