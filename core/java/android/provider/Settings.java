@@ -4535,7 +4535,14 @@ public final class Settings {
          * 2 - force dark
          * @hide
          */
-        public static final String SYSTEM_UI_THEME = "system_ui_theme";
+         public static final String SYSTEM_UI_THEME = "system_ui_theme";
+
+        /**
+         * Select various accents to go along with system themes
+         *
+         * @hide
+         */
+        public static final String ACCENT_PICKER = "accent_picker";
 
         /**
          * Three Finger Gesture from Oppo
