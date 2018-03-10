@@ -24,8 +24,6 @@
 
     <string name="summary_empty" translatable="false"></string>
 
-    <string name="recents_app_killed">App killed</string>
-
     <!-- Caffeine QS Tile -->
     <string name="quick_settings_caffeine_label">Caffeine</string>
     <string name="accessibility_quick_settings_caffeine_off">Caffeine off</string>
@@ -138,4 +136,5 @@
     <string name="quick_settings_high_brightness">High brightness</string>
 
 
+     <string name="recents_app_killed">App killed</string>
 </resources>
