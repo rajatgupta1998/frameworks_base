@@ -6487,7 +6487,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateClockPosition();
             updateBatterySettings();
             setFpToDismissNotifications();
-            updateTickerSettings();
         }
     }
 
@@ -6604,9 +6603,8 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private void updateTickerSettings() {
         mTickerEnabled = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_SHOW_TICKER, 0,
-                UserHandle.USER_CURRENT) == 1;
-        initTickerView();
+                Settings.System.STATUS_BAR_SHOW_TICKER, 1,
+                UserHandle.USER_CURRENT);
     }
 
     protected final ContentObserver mNavbarObserver = new ContentObserver(mHandler) {
