@@ -6318,6 +6318,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     };
 
     private CandySettingsObserver mCandySettingsObserver = new CandySettingsObserver(mHandler);
+
     private class CandySettingsObserver extends ContentObserver {
        CandySettingsObserver(Handler handler) {
             super(handler);
@@ -6365,9 +6366,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.USE_SLIM_RECENTS),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.AMBIENT_DOZE_CUSTOM_BRIGHTNESS),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.FORCE_AMBIENT_FOR_MEDIA),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -6381,6 +6379,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.STATUS_BAR_BATTERY_STYLE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.AMBIENT_DOZE_AUTO_BRIGHTNESS),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LAST_DOZE_AUTO_BRIGHTNESS),
@@ -6428,9 +6429,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.USE_SLIM_RECENTS))) {
                 updateRecentsMode();
             } else if (uri.equals(Settings.System.getUriFor(
-                    Settings.System.AMBIENT_DOZE_CUSTOM_BRIGHTNESS))) {
-                updateDozeBrightness();
-            } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.QS_TILE_TITLE_VISIBILITY))) {
                 updateQsPanelResources();
                 setQsPanelOptions();
@@ -6449,6 +6447,9 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.Secure.STATUS_BAR_BATTERY_STYLE))) {
                 updateBatterySettings();
             } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.AMBIENT_DOZE_AUTO_BRIGHTNESS))) {
+                updateDozeBrightness();
+            } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.LAST_DOZE_AUTO_BRIGHTNESS))) {
                 updateDozeBrightness();
             } else if (uri.equals(Settings.System.getUriFor(
@@ -6457,6 +6458,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.Secure.getUriFor(
                     Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS))) {
                 setFpToDismissNotifications();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_SHOW_TICKER))) {
+                updateTickerSettings();
             }
         }
 
@@ -6473,6 +6477,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateClockPosition();
             updateBatterySettings();
             setFpToDismissNotifications();
+            updateTickerSettings();
         }
     }
 
@@ -6491,10 +6496,10 @@ public class StatusBar extends SystemUI implements DemoMode,
     private void updateDozeBrightness() {
         int defaultDozeBrightness = mContext.getResources().getInteger(
                 com.android.internal.R.integer.config_screenBrightnessDoze);
-        int customDozeBrightness = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.AMBIENT_DOZE_CUSTOM_BRIGHTNESS, defaultDozeBrightness,
+        int lastValue = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LAST_DOZE_AUTO_BRIGHTNESS, defaultDozeBrightness,
                 UserHandle.USER_CURRENT);
-        StatusBarWindowManager.updateCustomBrightnessDozeValue(customDozeBrightness);
+        mStatusBarWindowManager.updateDozeBrightness(lastValue);
     }
 
     private void setStatusBarWindowViewOptions() {
@@ -6585,6 +6590,13 @@ public class StatusBar extends SystemUI implements DemoMode,
         mFpDismissNotifications = Settings.Secure.getIntForUser(mContext.getContentResolver(),
                 Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS, 0,
                 UserHandle.USER_CURRENT) == 1;
+    }
+
+    private void updateTickerSettings() {
+        mTickerEnabled = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_SHOW_TICKER, 0,
+                UserHandle.USER_CURRENT) == 1;
+        initTickerView();
     }
 
     protected final ContentObserver mNavbarObserver = new ContentObserver(mHandler) {

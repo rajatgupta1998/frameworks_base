@@ -161,7 +161,6 @@ public abstract class DisplayManagerInternal {
      /**
      * Ambient display brightness
      */
-    public abstract void updateCustomBrightnessDozeValue(int value);
     public abstract void enableAutoDozeBrightness(boolean enable);
 
     /**
