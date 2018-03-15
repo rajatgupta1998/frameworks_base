@@ -4529,7 +4529,7 @@ public final class Settings {
          */
         public static final String ANBI_ENABLED = "anbi_enabled";
 
-         /**
+        /**
          * 0 - wallpaper based
          * 1 - force light
          * 2 - force dark
@@ -4578,6 +4578,14 @@ public final class Settings {
          * @hide
          */
         public static final String HEADSET_CONNECT_PLAYER = "headset_connect_player";
+
+        /**
+         * Stores the app to be launched if the user taps on the screenshot notification edit button
+         * @hide
+         */
+        public static final String SCREENSHOT_EDIT_USER_APP = "screenshot_edit_user_app";
+
+        /** End of ABC system settings**/
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
