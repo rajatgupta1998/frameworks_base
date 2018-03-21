@@ -6667,6 +6667,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.FP_SWIPE_TO_DISMISS_NOTIFICATIONS),
+                    false, this, UserHandle.USER_ALL);
                     setFpToDismissNotifications();
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.ACCENT_PICKER),
