@@ -1570,5 +1570,19 @@ public final class PowerManager {
         try {
             mService.powerHint(hintId, data.length > 0 ? data[0] : 0);
         } catch (RemoteException dummy) {}
+
+    }
+
+    /**
+     * @hide
+     */
+    public String getSeenWakeLocks() {
+        try {
+            if (mService != null) {
+                return mService.getSeenWakeLocks();
+            }
+        } catch (RemoteException e) {
+        }
+        return null;
     }
 }
