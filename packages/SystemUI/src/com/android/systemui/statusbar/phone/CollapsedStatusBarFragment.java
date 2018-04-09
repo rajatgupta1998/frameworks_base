@@ -49,6 +49,7 @@ import com.android.systemui.statusbar.policy.EncryptionHelper;
 import com.android.systemui.statusbar.policy.KeyguardMonitor;
 import com.android.systemui.statusbar.policy.NetworkController;
 import com.android.systemui.statusbar.policy.NetworkController.SignalCallback;
+import com.android.systemui.statusbar.policy.NetworkTraffic;
 
 /**
  * Contains the collapsed status bar and handles hiding/showing based on disable flags
@@ -74,6 +75,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private TickerObserver mTickerObserver;
     private ContentResolver mContentResolver;
     private View mTickerViewFromStub;
+
+    private NetworkTraffic mNetworkTraffic;
 
     private SignalCallback mSignalCallback = new SignalCallback() {
         @Override
@@ -112,7 +115,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             getContext().getContentResolver().registerContentObserver(
                     Settings.System.getUriFor(Settings.System.STATUS_BAR_SHOW_TICKER), false, this,
                     UserHandle.USER_ALL);
-        }
+            }
 
         @Override
         protected void update() {
@@ -122,6 +125,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             initTickerView();
 
             mStatusBarComponent.updateBatterySettings();
+            mNetworkTraffic.setMode();
+            mNetworkTraffic.updateSettings();
         }
     }
 
@@ -147,6 +152,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         // Default to showing until we know otherwise.
         showSystemIconArea(false);
         initEmergencyCryptkeeperText();
+        mNetworkTraffic = mStatusBar.findViewById(R.id.networkTraffic);
 
         mTickerObserver.observe();
         initTickerView();
