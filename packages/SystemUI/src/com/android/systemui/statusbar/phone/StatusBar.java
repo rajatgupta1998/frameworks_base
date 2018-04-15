@@ -5219,6 +5219,7 @@ public class StatusBar extends SystemUI implements DemoMode,
      */
     protected void updateTheme() {
         final boolean inflated = mStackScroller != null;
+
         boolean useDarkTheme = false;
         boolean useBlackAFTheme = false;
         haltTicker();
@@ -5235,10 +5236,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             // Check for black and white accent so we don't end up
             // with white on white or black on black
             unfuckBlackWhiteAccent();
-        } else {
-            useDarkTheme = mCurrentTheme == 2;
-            unfuckBlackWhiteAccent();
-        } 
+        }
         if (isUsingDarkTheme() != useDarkTheme) {
             ThemeAccentUtils.setLightDarkTheme(mOverlayManager, mCurrentUserId, useDarkTheme);
         }
