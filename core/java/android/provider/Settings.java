@@ -4740,6 +4740,12 @@ public final class Settings {
         public static final String SCREENSHOT_EDIT_USER_APP = "screenshot_edit_user_app";
 
         /**
+         * Hide lockscreen icon
+         * @hide
+         */
+        public static final String HIDE_LOCKSCREEN_ICON = "hide_lockscreen_icon";
+
+        /**
          * Enable blocking wakelock
          * @hide
          */
@@ -5082,6 +5088,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(BATTERY_LIGHT_FULL_COLOR);
             PRIVATE_SETTINGS.add(BATTERY_LIGHT_REALLY_FULL_COLOR);
             PRIVATE_SETTINGS.add(VOLUME_LINK_NOTIFICATION);
+            PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_ICON);
         }
 
         /**
