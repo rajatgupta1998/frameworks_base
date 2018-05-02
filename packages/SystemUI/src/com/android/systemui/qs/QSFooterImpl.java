@@ -21,7 +21,9 @@ import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION
 import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -29,12 +31,15 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.UserManager;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.provider.AlarmClock;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -66,8 +71,8 @@ import com.android.systemui.statusbar.policy.UserInfoController;
 import com.android.systemui.statusbar.policy.UserInfoController.OnUserInfoChangedListener;
 
 public class QSFooterImpl extends FrameLayout implements QSFooter,
-        NextAlarmChangeCallback, OnClickListener, OnUserInfoChangedListener, EmergencyListener,
-        SignalCallback {
+        NextAlarmChangeCallback, OnClickListener, OnLongClickListener, OnUserInfoChangedListener,
+        EmergencyListener, SignalCallback {
     private static final float EXPAND_INDICATOR_THRESHOLD = .93f;
 
     private ActivityStarter mActivityStarter;
@@ -103,8 +108,13 @@ private View mRunningServicesButton;
     private boolean mKeyguardShowing;
     private TouchAnimator mAlarmAnimator;
 
+    private final Vibrator mVibrator;
+
     public QSFooterImpl(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
+        ContentResolver resolver = context.getContentResolver();
+        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     @Override
@@ -123,6 +133,7 @@ private View mRunningServicesButton;
         mExpandIndicator = findViewById(R.id.expand_indicator);
         mSettingsButton = findViewById(R.id.settings_button);
         mSettingsButton.setOnClickListener(this);
+        mSettingsButton.setOnLongClickListener(this);
 
         mAlarmStatusCollapsed = findViewById(R.id.alarm_status_collapsed);
         mAlarmStatus = findViewById(R.id.alarm_status);
@@ -362,6 +373,23 @@ private View mRunningServicesButton;
                         AlarmClock.ACTION_SHOW_ALARMS), 0);
             }
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        if (v == mSettingsButton) {
+            startCandyShopActivity();
+            mVibrator.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+        }
+        return false;
+    }
+
+    private static final ComponentName CANDYSHOP_SETTING_COMPONENT = new ComponentName(
+        "com.android.settings", "com.android.settings.Settings$CandyShopActivity");
+
+    private void startCandyShopActivity() {
+        mActivityStarter.startActivity(new Intent().setComponent(CANDYSHOP_SETTING_COMPONENT),
+                true /* dismissShade */);
     }
 
     private void startSettingsActivity() {
