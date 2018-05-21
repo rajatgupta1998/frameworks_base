@@ -152,7 +152,7 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
             mTrackLenght.setText(mLengthInfo);
             mMediaMetaData = mediaMetaData;
             mMediaText = notificationText;
-            if (mPulsing) {
+            if (mDozing) {
                 mAmbientIndication.setVisibility(View.VISIBLE);
             }
             boolean isAnotherTrack = mInfoAvailable
