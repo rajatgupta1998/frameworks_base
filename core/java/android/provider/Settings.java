@@ -4531,8 +4531,9 @@ public final class Settings {
         public static final String GESTURE_ANYWHERE_TRIGGER_HEIGHT = "gesture_anywhere_trigger_height";
 
         /**
-         * Whether to display the gesture anywhere trigger region or not.
-         * Used internally for showing the trigger in settings so user can see its placement
+         * Whether to play notification sound and vibration if screen is ON
+         * 0 - never
+         * 1 - always
          * @hide
          */
         @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_FIELD)
