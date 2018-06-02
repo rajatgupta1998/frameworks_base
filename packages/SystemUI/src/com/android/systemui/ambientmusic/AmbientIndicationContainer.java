@@ -135,6 +135,9 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
             mAmbientIndication.setVisibility(View.VISIBLE);
             if (mStatusBar != null) {
                 mStatusBar.triggerAmbientForMedia();
+                if (mStatusBar.isPulsing()) {
+                    mStatusBar.getDozeScrimController().extendPulseForMusicTicker();
+                }
             }
         }
     }
