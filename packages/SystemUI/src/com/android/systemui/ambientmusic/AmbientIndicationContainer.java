@@ -141,5 +141,9 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
             }
         }
     }
+
+    public View getIndication() {
+        return mAmbientIndication;
+    }
 }
 
