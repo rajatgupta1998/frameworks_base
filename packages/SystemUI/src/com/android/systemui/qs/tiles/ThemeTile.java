@@ -16,30 +16,10 @@
 
 package com.android.systemui.qs.tiles;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.systemui.plugins.qs.DetailAdapter;
-import com.android.systemui.plugins.qs.QSTile;
-import com.android.systemui.plugins.qs.QSTile.BooleanState;
-import com.android.systemui.qs.QSDetailItems;
-import com.android.systemui.qs.QSDetailItems.Item;
-import com.android.systemui.qs.QSDetailItemsList;
-import com.android.systemui.qs.QSHost;
-import com.android.systemui.qs.tileimpl.QSTileImpl;
-import com.android.systemui.R;
-
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.om.IOverlayManager;
-import android.content.om.OverlayInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -53,6 +33,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+
+import com.android.systemui.Prefs;
+import com.android.systemui.R;
+import com.android.systemui.plugins.qs.DetailAdapter;
+import com.android.systemui.plugins.qs.QSTile;
+import com.android.systemui.plugins.qs.QSTile.BooleanState;
+import com.android.systemui.qs.QSDetailItems;
+import com.android.systemui.qs.QSDetailItems.Item;
+import com.android.systemui.qs.QSDetailItemsList;
+import com.android.systemui.qs.QSHost;
+import com.android.systemui.qs.tileimpl.QSTileImpl;
+import com.android.internal.statusbar.ThemeAccentUtils;
+import com.android.systemui.statusbar.phone.SystemUIDialog;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ThemeTile extends QSTileImpl<BooleanState> {
 
@@ -119,12 +123,14 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
     }
 
     private IOverlayManager mOverlayManager;
+    private int mCurrentUserId;
     private Mode mMode;
 
     public ThemeTile(QSHost host) {
         super(host);
         mOverlayManager = IOverlayManager.Stub.asInterface(
                 ServiceManager.getService(Context.OVERLAY_SERVICE));
+        mCurrentUserId = ActivityManager.getCurrentUser();
         mMode = Mode.ACCENT;
     }
 
@@ -282,39 +288,13 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
     }
 
     private ThemeTileItem getThemeItemForStyleMode() {
-        boolean isDark = isUsingDarkTheme();
-        boolean isBlackAF = isUsingBlackAFTheme();
-        if (isDark || isBlackAF) {
+        if (ThemeAccentUtils.isUsingDarkTheme(mOverlayManager, mCurrentUserId)) {
             return new ThemeTileItem(20, R.color.quick_settings_theme_tile_white,
                     R.string.quick_settings_theme_tile_color_white);
         } else {
             return new ThemeTileItem(20, R.color.quick_settings_theme_tile_black,
                     R.string.quick_settings_theme_tile_color_black);
         }
-    }
-
-    // Check for the dark theme overlay
-    private boolean isUsingDarkTheme() {
-        OverlayInfo themeInfo = null;
-        try {
-            themeInfo = mOverlayManager.getOverlayInfo("com.android.system.theme.dark",
-                    UserHandle.USER_CURRENT);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        return themeInfo != null && themeInfo.isEnabled();
-    }
-
-    // Check for the blackaf theme overlay
-    private boolean isUsingBlackAFTheme() {
-        OverlayInfo themeInfo = null;
-        try {
-            themeInfo = mOverlayManager.getOverlayInfo("com.android.system.theme.blackaf",
-                    UserHandle.USER_CURRENT);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-        return themeInfo != null && themeInfo.isEnabled();
     }
 
     @Override
