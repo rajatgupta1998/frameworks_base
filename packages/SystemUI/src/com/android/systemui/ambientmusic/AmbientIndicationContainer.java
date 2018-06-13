@@ -13,16 +13,12 @@ import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.android.systemui.AutoReinflateContainer;
-import com.android.systemui.R;
 import com.android.systemui.ambientmusic.AmbientIndicationInflateListener;
 import com.android.systemui.AutoReinflateContainer;
 import com.android.systemui.doze.DozeReceiver;
 import com.android.systemui.R;
 import com.android.systemui.doze.DozeLog;
 import com.android.systemui.statusbar.phone.StatusBar;
-
-import com.android.systemui.ambientmusic.AmbientIndicationInflateListener;
 
 import java.util.concurrent.TimeUnit;
 
@@ -40,7 +36,7 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
     private boolean mInfoAvailable;
     private String mInfoToSet;
     private String mLengthInfo;
-    private boolean mPulsing;
+    private boolean mDozing;
     private String mLastInfo;
 
     public AmbientIndicationContainer(Context context, AttributeSet attributeSet) {
@@ -66,20 +62,21 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
         setIndication(mMediaMetaData);
     }
 
-    public void setPulsing(boolean pulsing) {
-        mPulsing = pulsing;
-        setTickerMarquee(pulsing);
-        if (pulsing && mInfoAvailable) {
+    public void setDozing(boolean dozing) {
+        mDozing = dozing;
+        setTickerMarquee(dozing);
+        if (dozing && mInfoAvailable) {
             mText.setText(mInfoToSet);
             mLastInfo = mInfoToSet;
             mTrackLenght.setText(mLengthInfo);
             mAmbientIndication.setVisibility(View.VISIBLE);
+            updatePosition();
         } else {
+            setCleanLayout(-1);
             mAmbientIndication.setVisibility(View.INVISIBLE);
             mText.setText(null);
             mTrackLenght.setText(null);
         }
-        updatePosition();
     }
 
     private void setTickerMarquee(boolean enable) {
@@ -97,6 +94,11 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
             mText.setEllipsize(null);
             mText.setSelected(false);
         }
+    }
+
+    public void setOnPulseEvent(int reason, boolean pulsing) {
+        setCleanLayout(reason);
+        setTickerMarquee(pulsing);
     }
 
     public void setCleanLayout(int reason) {
@@ -130,7 +132,7 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
                 }
             }
         }
-        if (mPulsing) {
+        if (mDozing) {
             // if we are already showing an Ambient Notification with track info,
             // stop the current scrolling and start it delayed again for the next song
             setTickerMarquee(true);
@@ -146,7 +148,8 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
             mText.setText(mInfoToSet);
             mTrackLenght.setText(mLengthInfo);
             mMediaMetaData = mediaMetaData;
-            if (mPulsing) {
+            mMediaText = notificationText;
+            if (mDozing) {
                 mAmbientIndication.setVisibility(View.VISIBLE);
             }
             boolean isAnotherTrack = mInfoAvailable
@@ -157,7 +160,7 @@ public class AmbientIndicationContainer extends AutoReinflateContainer {
                     mStatusBar.getDozeScrimController().extendPulseForMusicTicker();
                 }
             }
-            if (mPulsing) {
+            if (mDozing) {
                 mLastInfo = mInfoToSet;
             }
         }
