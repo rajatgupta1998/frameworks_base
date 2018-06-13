@@ -524,6 +524,8 @@ public class StatusBar extends SystemUI implements DemoMode,
     boolean mExpandedVisible;
 
     ActivityManager mAm;
+    private ArrayList<String> mBlacklist = new ArrayList<String>();
+
     boolean mLessBoringHeadsUp;
 
     private boolean mFpDismissNotifications;
@@ -2004,8 +2006,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                 if (icon != null) {
                     drawable = icon.loadDrawable(mContext);
                 }
-                String title = n.extras.getString(Notification.EXTRA_TITLE);
-                String text = n.extras.getString(Notification.EXTRA_TEXT);
                 mSlimRecents.setMedia(n.isColorizedMedia(), colors, drawable, mMediaMetadata, title, text);
             }
         }
@@ -6803,21 +6803,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LOCKSCREEN_DATE_SELECTION),
                     false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.HIDE_LOCKSCREEN_ALARM),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.HIDE_LOCKSCREEN_CLOCK),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.HIDE_LOCKSCREEN_DATE),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.LOCKSCREEN_CLOCK_SELECTION),
-                    false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.LOCKSCREEN_DATE_SELECTION),
-                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -6905,7 +6890,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             setStatusBarWindowViewOptions();
             setLockscreenMediaMetadata();
             setStatusbarBatterySaverColor();
-            setQsPanelOptions();
             updateQsPanelResources();
             setUseLessBoringHeadsUp();
             updateRecentsMode();
@@ -6914,6 +6898,7 @@ public class StatusBar extends SystemUI implements DemoMode,
             updateBatterySettings();
             setFpToDismissNotifications();
             updateKeyguardStatusSettings();
+            setQsPanelOptions();
         }
     }
 
@@ -6943,12 +6928,6 @@ public class StatusBar extends SystemUI implements DemoMode,
     private void setLockscreenMediaMetadata() {
         mLockscreenMediaMetadata = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.LOCKSCREEN_MEDIA_METADATA, 0, UserHandle.USER_CURRENT) == 1;
-    }
-
-    private void setHeadsUpBlacklist() {
-        final String blackString = Settings.System.getString(mContext.getContentResolver(),
-                    Settings.System.HEADS_UP_BLACKLIST_VALUES);
-        splitAndAddToArrayList(mBlacklist, blackString, "\\|");
     }
 
     private void setForceAmbient() {
@@ -7016,19 +6995,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         if (mSlimRecents != null) {
             mSlimRecents.rebuildRecentsScreen();
         }
-    }
-
-    private void setForceAmbient() {
-        mAmbientMediaPlaying = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.FORCE_AMBIENT_FOR_MEDIA, 0,
-                UserHandle.USER_CURRENT);
-        if (isAmbientContainerAvailable()) {
-            ((AmbientIndicationContainer)mAmbientIndicationContainer).setIndication(mMediaMetadata);
-        }
-    }
-
-    private boolean isAmbientContainerAvailable() {
-        return mAmbientMediaPlaying != 0 && mAmbientIndicationContainer != null;
     }
 
     private void updateClockPosition() {
