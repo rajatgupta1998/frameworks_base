@@ -26,9 +26,6 @@ import com.android.systemui.Dependency;
 
 public class ClockLeft extends Clock {
 
-    private boolean mClockVisibleByPolicy = true;
-    private boolean mClockVisibleByUser = true;
-
     public ClockLeft(Context context) {
         this(context, null);
     }
@@ -46,24 +43,12 @@ public class ClockLeft extends Clock {
         updateClockVisibility();
     }
 
-    public void setClockVisibilityByPolicy(boolean visible) {
-        mClockVisibleByPolicy = visible;
-        updateClockVisibility();
-    }
-
+    @Override
     protected void updateClockVisibility() {
         boolean visible = mClockStyle == STYLE_CLOCK_LEFT && mShowClock
                 && mClockVisibleByPolicy && mClockVisibleByUser;
         Dependency.get(IconLogger.class).onIconVisibility("center_clock", visible);
         int visibility = visible ? View.VISIBLE : View.GONE;
         setVisibility(visibility);
-    }
-
-    @Override
-    public void disable(int state1, int state2, boolean animate) {
-        boolean clockVisibleByPolicy = (state1 & StatusBarManager.DISABLE_CLOCK) == 0;
-        if (clockVisibleByPolicy != mClockVisibleByPolicy) {
-            setClockVisibilityByPolicy(clockVisibleByPolicy);
-        }
     }
 }
