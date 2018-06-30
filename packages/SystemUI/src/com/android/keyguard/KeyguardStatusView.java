@@ -428,8 +428,16 @@ public class KeyguardStatusView extends GridLayout {
                         getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
                 mDateView.setPadding(0,0,0,0);
                 break;
-
-            case 1: // semi-transparent box
+            case 1: // default but bigger size
+                mDateView.setBackgroundResource(0);
+                mDateView.setTypeface(Typeface.DEFAULT);
+                mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size));
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size));
+                mDateView.setPadding(0,0,0,0);
+                break;
+            case 2: // semi-transparent box
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_box_str_border));
                 mDateView.setTypeface(Typeface.DEFAULT_BOLD);
                 mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
@@ -438,8 +446,7 @@ public class KeyguardStatusView extends GridLayout {
                         getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size));
                 mDateView.setPadding(40,20,40,20);
                 break;
-
-            case 2: // semi-transparent box (round)
+            case 3: // semi-transparent box (round)
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_border));
                 mDateView.setTypeface(Typeface.DEFAULT_BOLD);
                 mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
