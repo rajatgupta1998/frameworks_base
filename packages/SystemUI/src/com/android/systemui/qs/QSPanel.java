@@ -722,6 +722,13 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
 
     private void setAnimationTile(QSTileView v) {
         ObjectAnimator animTile;
+
+        mAnimStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.ANIM_TILE_STYLE, 0, UserHandle.USER_CURRENT);
+        mAnimDuration = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.ANIM_TILE_DURATION, 2000, UserHandle.USER_CURRENT);
+        mInterpolatorType = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.ANIM_TILE_INTERPOLATOR, 0, UserHandle.USER_CURRENT);
         if (mAnimStyle == 0) {
             //No animation
             return;
@@ -821,11 +828,5 @@ public class QSPanel extends LinearLayout implements Tunable, Callback, Brightne
                 configureTile(r.tile, r.tileView);
             }
         }
-        mAnimStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.ANIM_TILE_STYLE, 0, UserHandle.USER_CURRENT);
-        mAnimDuration = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.ANIM_TILE_DURATION, 2000, UserHandle.USER_CURRENT);
-        mInterpolatorType = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.ANIM_TILE_INTERPOLATOR, 0, UserHandle.USER_CURRENT);
     }
 }
