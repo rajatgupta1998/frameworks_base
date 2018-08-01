@@ -79,11 +79,6 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private View mCustomCarrierLabel;
     private int mShowCarrierLabel;
 
-            getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.STATUS_BAR_SHOW_CARRIER),
-                    false, this, UserHandle.USER_ALL);
-        }
-
     private SignalCallback mSignalCallback = new SignalCallback() {
         @Override
         public void setIsAirplaneMode(NetworkController.IconState icon) {
@@ -121,6 +116,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             getContext().getContentResolver().registerContentObserver(
                     Settings.System.getUriFor(Settings.System.STATUS_BAR_SHOW_TICKER), false, this,
                     UserHandle.USER_ALL);
+            getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_SHOW_CARRIER),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -281,7 +279,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
     public void hideCarrierName(boolean animate) {
         if (mCustomCarrierLabel != null) {
-            animateHide(mCustomCarrierLabel, animate, true);
+            animateHide(mCustomCarrierLabel, animate);
         }
     }
 
@@ -365,14 +363,13 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                     mTickerEnabled, getContext(), mStatusBar, tickerView, tickerIcon, mTickerViewFromStub);
         } else {
             mStatusBarComponent.disableTicker();
-            }
         }
+    }
 
     public void updateSettings(boolean animate) {
         mShowCarrierLabel = Settings.System.getIntForUser(
                 getContext().getContentResolver(), Settings.System.STATUS_BAR_SHOW_CARRIER, 1,
                 UserHandle.USER_CURRENT);
-        }
         setCarrierLabel(animate);
     }
 
@@ -380,7 +377,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         if (mShowCarrierLabel == 2 || mShowCarrierLabel == 3) {
             animateShow(mCustomCarrierLabel, animate);
         } else {
-            animateHide(mCustomCarrierLabel, animate, false);
+            animateHide(mCustomCarrierLabel, animate);
         }
     }
 }

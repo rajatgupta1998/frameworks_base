@@ -104,7 +104,7 @@ public class CarrierLabel extends TextView implements DarkReceiver {
                         intent.getStringExtra(TelephonyIntents.EXTRA_SPN),
                         intent.getBooleanExtra(TelephonyIntents.EXTRA_SHOW_PLMN, false),
                         intent.getStringExtra(TelephonyIntents.EXTRA_PLMN));
-                isCN = candyUtils.isChineseLanguage();
+                isCN = CandyUtils.isChineseLanguage();
             }
         }
     };
