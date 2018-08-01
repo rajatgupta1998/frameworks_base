@@ -32,4 +32,12 @@
         adb_network,weather,pip,screenshot,caffeine,headsup,screenrecord,keydisable,navbardisable,assist,voiceassist,google,sync
     </string>
 
+    <!-- Hardware ui (power menu) alignement:
+         Use one of the following values basing on the power button position:
+         * Top | Back -> 49 (Gravity.TOP | Gravity.CENTER_HORIZONTAL)
+         * Left -> 51 (Gravity.TOP | Gravity.LEFT)
+         * Right -> 53 (Gravity.TOP | Gravity.RIGHT)
+    -->
+    <integer name="hardware_ui_align">53</integer>
+
 </resources>

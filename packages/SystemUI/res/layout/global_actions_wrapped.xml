@@ -26,5 +26,10 @@
             android:translationZ="8dp" />
 
     </ScrollView>
+        android:layout_gravity="@integer/hardware_ui_align"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:translationZ="8dp" />
 
 </com.android.systemui.HardwareUiLayout>
