@@ -206,7 +206,7 @@ class GlobalScreenrecord {
     public GlobalScreenrecord(Context context) {
         mContext = context;
         mHigherAspectRatio = Resources.getSystem().getBoolean(
-                 org.lineageos.platform.internal.R.bool.config_haveHigherAspectRatioScreen);
+                 com.android.internal.R.bool.config_haveHigherAspectRatioScreen);
         mHandler = new Handler() {
             public void handleMessage(Message msg) {
                 if (msg.what == MSG_TASK_ENDED) {
