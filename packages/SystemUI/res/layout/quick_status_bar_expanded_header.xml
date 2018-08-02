@@ -30,23 +30,29 @@
     android:paddingStart="0dp"
     android:paddingTop="0dp">
 
-    <ImageView
-        android:id="@+id/qs_header_image"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="@dimen/notification_panel_width"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:paddingBottom="@dimen/qs_panel_footer_height"/>
+        android:clipChildren="true"
+        android:clipToPadding="true"
+        android:layout_gravity="center"
+        android:paddingBottom="@dimen/qs_panel_footer_height" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/qs_header_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
+    </LinearLayout>
 
     <include layout="@layout/quick_status_bar_header_system_icons" />
 
     <com.android.systemui.qs.HorizontalClippingLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="@dimen/qs_scroller_top_margin"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:gravity="center"
@@ -101,5 +107,5 @@
             android:textStyle="bold"
             android:visibility="invisible"/>
 
-    </RelativeLayout>
+
 </com.android.systemui.qs.QuickStatusBarHeader>

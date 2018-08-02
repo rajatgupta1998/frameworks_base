@@ -91,7 +91,7 @@
                 android:layout_marginEnd="2dp"
                 android:singleLine="false"
                 android:fontFamily="sans-serif-condensed"
-                android:gravity="right|center_vertical"/>
+                android:gravity="right|center_vertical" />
 
             <include layout="@layout/system_icons" />
 
@@ -110,20 +110,20 @@
                 android:id="@+id/status_bar_logo_right"
                 android:layout_width="@dimen/status_bar_icon_size"
                 android:layout_height="@dimen/status_bar_icon_size"
-                android:src="@drawable/ic_status_bar_kronic_logo"
+                android:src="@drawable/ic_status_bar_candy_logo"
                 android:scaleType="centerInside"
                 android:paddingStart="4dp"
                 android:visibility="gone" />
         </com.android.keyguard.AlphaOptimizedLinearLayout>
     </LinearLayout>
 
-       <com.android.keyguard.AlphaOptimizedLinearLayout
-           android:id="@+id/center_clock_layout"
-           android:gravity="center"
-           android:orientation="horizontal"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           >
+   <com.android.keyguard.AlphaOptimizedLinearLayout
+       android:id="@+id/center_clock_layout"
+       android:gravity="center"
+       android:orientation="horizontal"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       >
 
         <com.android.systemui.statusbar.policy.ClockCenter
             android:id="@+id/center_clock"
