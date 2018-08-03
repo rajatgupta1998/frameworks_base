@@ -23,6 +23,7 @@ import android.annotation.Nullable;
 import android.app.Fragment;
 import android.app.StatusBarManager;
 import android.content.ContentResolver;
+import android.database.ContentObserver;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -79,6 +80,24 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private View mCustomCarrierLabel;
     private int mShowCarrierLabel;
 
+    private final Handler mHandler = new Handler();
+
+    private class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+         void observe() {
+            getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_SHOW_CARRIER),
+                    false, this, UserHandle.USER_ALL);
+        }
+         @Override
+        public void onChange(boolean selfChange) {
+            updateSettings(true);
+        }
+    }
+    private SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
+
     private SignalCallback mSignalCallback = new SignalCallback() {
         @Override
         public void setIsAirplaneMode(NetworkController.IconState icon) {
@@ -98,6 +117,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                 Settings.System.STATUS_BAR_SHOW_TICKER, 1,
                 UserHandle.USER_CURRENT);
         mTickerObserver = new TickerObserver(new Handler());
+        mSettingsObserver.observe();
     }
 
     class TickerObserver extends UserContentObserver {
@@ -258,8 +278,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     public void hideSystemIconArea(boolean animate) {
-        animateHide(mSystemIconArea, animate);
-        animateHide(mCenterClockLayout, animate);
+        animateHide(mSystemIconArea, animate, true);
+        animateHide(mCenterClockLayout, animate, true);
     }
 
     public void showSystemIconArea(boolean animate) {
@@ -268,8 +288,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     public void hideNotificationIconArea(boolean animate) {
-        animateHide(mNotificationIconAreaInner, animate);
-        animateHide(mCenterClockLayout, animate);
+        animateHide(mNotificationIconAreaInner, animate, true);
+        animateHide(mCenterClockLayout, animate, true);
     }
 
     public void showNotificationIconArea(boolean animate) {
@@ -279,7 +299,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
     public void hideCarrierName(boolean animate) {
         if (mCustomCarrierLabel != null) {
-            animateHide(mCustomCarrierLabel, animate);
+            animateHide(mCustomCarrierLabel, animate, true);
         }
     }
 
@@ -292,11 +312,11 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     /**
      * Hides a view.
      */
-    private void animateHide(final View v, boolean animate) {
+    private void animateHide(final View v, boolean animate, final boolean invisible) {
         v.animate().cancel();
         if (!animate) {
             v.setAlpha(0f);
-            v.setVisibility(View.INVISIBLE);
+            v.setVisibility(invisible ? View.INVISIBLE : View.GONE);
             return;
         }
         v.animate()
@@ -304,7 +324,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                 .setDuration(160)
                 .setStartDelay(0)
                 .setInterpolator(Interpolators.ALPHA_OUT)
-                .withEndAction(() -> v.setVisibility(View.INVISIBLE));
+                .withEndAction(() -> v.setVisibility(invisible ? View.INVISIBLE : View.GONE));
     }
 
     /**
@@ -377,7 +397,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         if (mShowCarrierLabel == 2 || mShowCarrierLabel == 3) {
             animateShow(mCustomCarrierLabel, animate);
         } else {
-            animateHide(mCustomCarrierLabel, animate);
+            animateHide(mCustomCarrierLabel, animate, false);
         }
     }
 }
