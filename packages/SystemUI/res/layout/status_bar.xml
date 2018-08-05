@@ -49,6 +49,17 @@
         android:orientation="horizontal"
         >
 
+        <com.android.systemui.statusbar.policy.ClockLeft
+            android:id="@+id/left_clock"
+            android:textAppearance="@style/TextAppearance.StatusBar.Clock"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:singleLine="true"
+            android:paddingEnd="4dp"
+            android:gravity="center_vertical|start"
+            android:visibility="gone"
+            />
+
         <com.android.systemui.candy.carrierlabel.CarrierLabel
             android:id="@+id/statusbar_carrier_text"
             android:layout_width="wrap_content"
@@ -114,6 +125,7 @@
                 android:scaleType="centerInside"
                 android:paddingStart="4dp"
                 android:visibility="gone" />
+
         </com.android.keyguard.AlphaOptimizedLinearLayout>
     </LinearLayout>
 
@@ -134,6 +146,7 @@
             android:visibility="gone"
             android:singleLine="true"
             />
+
     </com.android.keyguard.AlphaOptimizedLinearLayout>
 
     <ViewStub
