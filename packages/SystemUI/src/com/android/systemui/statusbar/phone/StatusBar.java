@@ -229,6 +229,7 @@ import com.android.systemui.recents.events.activity.AppTransitionFinishedEvent;
 import com.android.systemui.recents.events.activity.UndockingTaskEvent;
 import com.android.systemui.slimrecent.icons.IconsHandler;
 import com.android.systemui.recents.misc.SystemServicesProxy;
+import com.android.systemui.settings.BrightnessController;
 import com.android.systemui.slimrecent.RecentController;
 import com.android.systemui.stackdivider.Divider;
 import com.android.systemui.stackdivider.WindowManagerProxy;
@@ -290,8 +291,6 @@ import com.android.systemui.statusbar.stack.NotificationStackScrollLayout
 import com.android.systemui.statusbar.stack.StackStateAnimator;
 import com.android.systemui.util.NotificationChannels;
 import com.android.systemui.util.leak.LeakDetector;
-import com.android.systemui.tuner.TunerService;
-import com.android.systemui.tuner.TunerService.Tunable;
 import com.android.systemui.volume.VolumeComponent;
 
 import java.io.FileDescriptor;
@@ -315,7 +314,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         OnHeadsUpChangedListener, VisualStabilityManager.Callback, CommandQueue.Callbacks,
         ActivatableNotificationView.OnActivatedListener,
         ExpandableNotificationRow.ExpansionLogger, NotificationData.Environment,
-        ColorExtractor.OnColorsChangedListener, ConfigurationListener, Tunable,
+        ColorExtractor.OnColorsChangedListener, ConfigurationListener,
         ExpandableNotificationRow.OnExpandClickListener, InflationCallback, PackageChangedListener {
     public static final boolean MULTIUSER_DEBUG = false;
 
@@ -1167,11 +1166,6 @@ public class StatusBar extends SystemUI implements DemoMode,
                 = (MediaSessionManager) mContext.getSystemService(Context.MEDIA_SESSION_SERVICE);
         // TODO: use MediaSessionManager.SessionListener to hook us up to future updates
         // in session state
-
-        Dependency.get(TunerService.class).addTunable(this,
-                SCREEN_BRIGHTNESS_MODE,
-                STATUS_BAR_BRIGHTNESS_CONTROL,
-                QS_QUICKBAR_SCROLL_ENABLED);
 
         // Lastly, call to the icon policy to install/update all the icons.
         mIconPolicy = new PhoneStatusBarPolicy(mContext, mIconController);
@@ -7002,6 +6996,12 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL),
                     false, this, UserHandle.USER_ALL);
+	        resolver.registerContentObserver(Settings.System.getUriFor(
+		            Settings.System.SCREEN_BRIGHTNESS_MODE),
+		            false, this, UserHandle.USER_ALL);
+	        resolver.registerContentObserver(Settings.System.getUriFor(
+		            Settings.System.QS_QUICKBAR_SCROLL_ENABLED),
+		            false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -7089,6 +7089,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL))) {
                 setBrightnessSlider();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.QS_QUICKBAR_SCROLL_ENABLED))) {
+                mQuickStatusBarHeader.updateSettings();
             }
         }
 
@@ -9007,25 +9010,6 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     }
 
-    @Override
-    public void onTuningChanged(String key, String newValue) {
-        switch (key) {
-            case SCREEN_BRIGHTNESS_MODE:
-                mAutomaticBrightness = newValue != null && Integer.parseInt(newValue)
-                        == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
-                break;
-            case STATUS_BAR_BRIGHTNESS_CONTROL:
-                mBrightnessControl = newValue != null && Integer.parseInt(newValue) == 1;
-                break;
-                       case QS_QUICKBAR_SCROLL_ENABLED:
-                if (mQuickStatusBarHeader != null) {
-                    mQuickStatusBarHeader.updateSettings();
-                }
-                break;
-            default:
-                break;
-        }
-    }
     // End Extra BaseStatusBarMethods.
 
     private final Runnable mAutoDim = () -> {
